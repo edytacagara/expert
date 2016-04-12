@@ -1,0 +1,33 @@
+<knowledge>
+
+	<rules>
+		<rule>
+			<conditions>A,B,C</conditions>
+			<result>D</result>
+		</rule>
+		<rule>
+			<conditions>C</conditions>
+			<result>E</result>
+		</rule>
+	</rules>
+
+	<model>
+		<argument>temperatura</argument>
+		<!--
+			eq - equals (==)
+			ne - not equals (!=)
+			lt - less than (<)
+			le - les equal (<=)
+			ge - greater equal (>=)
+			gt - greater than (>) 
+		-->
+		<operator>gt,lt</operator>
+		<value>36.0,37.0</value>
+		<result>temperatura normalna</result>
+	</model>
+	
+	<constraints>
+		<constraint>A,C</constraint>
+	</constraints>
+	
+</knowledge>
