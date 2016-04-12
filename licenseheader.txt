@@ -1,0 +1,9 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}The GNU GPL License 
+${licensePrefix}Copyright (c) 2015-2016 IT Students of 5th year 
+${licensePrefix}at the University of Maria Curie-Sklodowska in Lublin 
+<#if licenseLast??>
+${licenseLast}
+</#if>
