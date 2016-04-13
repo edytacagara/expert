@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <knowledge>
 
 	<rules>
@@ -11,15 +12,24 @@
 		</rule>
 	</rules>
 
-	<model>
-		<argument>temperatura</argument>
-		<operator>gt,lt</operator>
-		<value>36.0,37.0</value>
-		<result>temperatura normalna</result>
-	</model>
+	<models>
+		<model>
+			<argument>temperatura</argument>
+			<operator>gt,lt</operator>
+			<value>36.0,37.0</value>
+			<result>temperatura normalna</result>
+		</model>
+		<model>
+			<argument>temperatura</argument>
+			<operator>lt</operator>
+			<value>36.0</value>
+			<result>temperatura niska</result>
+		</model>
+	</models>
 	
 	<constraints>
 		<constraint>A,C</constraint>
+		<constraint>C,F</constraint>
 	</constraints>
 	
 </knowledge>

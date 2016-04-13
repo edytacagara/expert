@@ -11,20 +11,22 @@
 		</rule>
 	</rules>
 
-	<model>
-		<argument>temperatura</argument>
-		<!--
-			eq - equals (==)
-			ne - not equals (!=)
-			lt - less than (<)
-			le - les equal (<=)
-			ge - greater equal (>=)
-			gt - greater than (>) 
-		-->
-		<operator>gt,lt</operator>
-		<value>36.0,37.0</value>
-		<result>temperatura normalna</result>
-	</model>
+	<models>
+		<model>
+			<argument>temperatura</argument>
+			<!--
+				eq - equals (==)
+				ne - not equals (!=)
+				lt - less than (<)
+				le - les equal (<=)
+				ge - greater equal (>=)
+				gt - greater than (>) 
+			-->
+			<operator>gt,lt</operator>
+			<value>36.0,37.0</value>
+			<result>temperatura normalna</result>
+		</model>
+	</models>
 	
 	<constraints>
 		<constraint>A,C</constraint>

@@ -10,5 +10,5 @@ package pl.expert.core.engine;
  * @author Mariusz Batyra
  */
 public class Engine {
-    
+
 }
