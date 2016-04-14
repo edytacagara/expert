@@ -6,7 +6,6 @@
 package pl.expert;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
 import pl.expert.ui.MainFrame;
 
 /**
@@ -21,8 +20,7 @@ public class Bootstrap {
 
             @Override
             public void run() {
-                final JFrame frame = new MainFrame();
-                frame.setVisible(true);
+                MainFrame.launch(MainFrame.class);
             }
         });
         
