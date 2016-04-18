@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -31,14 +30,14 @@ public class MainFrame extends Application {
     @Override
     public void start(Stage primaryStage) {
         BorderPane root = new BorderPane();
-
         Scene scene = new Scene(root, WIDTH, HEIGHT);
 
         primaryStage.setTitle("Expert");
         primaryStage.setScene(scene);
 
         createMenuBar(root);
-        createHomeScreen(root);
+        //TODO ogarnac, przestalo dzialac wczytywanie obrazka
+//        createHomeScreen(root);
 
         primaryStage.show();
     }
@@ -53,31 +52,13 @@ public class MainFrame extends Application {
         root.setTop(menuBar);
     }
 
-    private void loadFile() {
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            LOGGER.log(Level.INFO, "{0} loaded", selectedFile.getName());
-        }
-    }
-
     private Menu createFileMenu() {
         Menu menuFile = new Menu("File");
         MenuItem openFile = new MenuItem("Load knowledge base");
-        openFile.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                loadFile();
-            }
-        });
+        openFile.setOnAction(event -> handleOpenFileAction(event));
 
         MenuItem exit = new MenuItem("Exit");
-        exit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                System.exit(0);
-            }
-        });
+        exit.setOnAction(event -> handleExitAction(event));
 
         menuFile.getItems().addAll(openFile, exit);
         return menuFile;
@@ -109,5 +90,17 @@ public class MainFrame extends Application {
         pictureRegion.getChildren().add(imageView);
 
         root.setCenter(pictureRegion);
+    }
+    
+    private void handleOpenFileAction(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            LOGGER.log(Level.INFO, "{0} loaded", selectedFile.getName());
+        }
+    }
+    
+    private void handleExitAction(ActionEvent actionEvent) {
+        System.exit(0);
     }
 }
