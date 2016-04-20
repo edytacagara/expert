@@ -6,20 +6,32 @@
 package pl.expert.ui;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import pl.expert.core.database.knowledge.Knowledge;
+import pl.expert.core.database.reader.KnowledgeReader;
+import pl.expert.core.exception.KnowledgeReaderException;
 
 public class MainFrame extends Application {
 
@@ -36,8 +48,7 @@ public class MainFrame extends Application {
         primaryStage.setScene(scene);
 
         createMenuBar(root);
-        //TODO ogarnac, przestalo dzialac wczytywanie obrazka
-//        createHomeScreen(root);
+        createHomeScreen(root);
 
         primaryStage.show();
     }
@@ -76,7 +87,7 @@ public class MainFrame extends Application {
     private Menu createHelpMenu() {
         Menu menuHelp = new Menu("Help");
         MenuItem about = new MenuItem("About");
-        
+
         menuHelp.getItems().addAll(about);
         return menuHelp;
     }
@@ -91,16 +102,69 @@ public class MainFrame extends Application {
 
         root.setCenter(pictureRegion);
     }
-    
+
     private void handleOpenFileAction(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            LOGGER.log(Level.INFO, "{0} loaded", selectedFile.getName());
+            try {
+                Knowledge knowledge = new KnowledgeReader().loadKnowledge(selectedFile);
+                LOGGER.log(Level.INFO, "{0} loaded", selectedFile.getName());
+                showSuccessAlert();
+            } catch (KnowledgeReaderException exception) {
+                LOGGER.log(Level.SEVERE, exception.getMessage());
+                showErrorAlert(exception);
+            }
         }
     }
-    
+
     private void handleExitAction(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    private void showErrorAlert(Exception exception) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Knowledge reading error");
+        alert.setHeaderText("Error occurred during loading knowledge base");
+        alert.setContentText(exception.getMessage());
+        alert.setResizable(true);
+
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        exception.printStackTrace(pw);
+        String exceptionText = sw.toString();
+
+        Label label = new Label("The exception stacktrace was:");
+
+        TextArea textArea = new TextArea(exceptionText);
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(label, 0, 0);
+        expContent.add(textArea, 0, 1);
+
+        alert.getDialogPane().getChildren()
+            .stream()
+            .filter(node -> node instanceof Label)
+            .forEach(node -> ((Label) node).setMinHeight(Region.USE_PREF_SIZE));
+        alert.getDialogPane().setExpandableContent(expContent);
+
+        alert.showAndWait();
+    }
+
+    private void showSuccessAlert() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText("Knowledge base has been successfully loaded");
+
+        alert.showAndWait();
     }
 }
