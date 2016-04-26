@@ -64,11 +64,11 @@ public class MainFrame extends Application {
     }
 
     private Menu createFileMenu() {
-        Menu menuFile = new Menu("File");
-        MenuItem openFile = new MenuItem("Load knowledge base");
+        Menu menuFile = new Menu("Plik");
+        MenuItem openFile = new MenuItem("Ładowanie bazy wiedzy");
         openFile.setOnAction(event -> handleOpenFileAction(event));
 
-        MenuItem exit = new MenuItem("Exit");
+        MenuItem exit = new MenuItem("Wyjście");
         exit.setOnAction(event -> handleExitAction(event));
 
         menuFile.getItems().addAll(openFile, exit);
@@ -76,17 +76,18 @@ public class MainFrame extends Application {
     }
 
     private Menu createInferenceMenu() {
-        Menu menuInference = new Menu("Inference");
-        MenuItem forward = new MenuItem("Forward");
-        MenuItem backward = new MenuItem("Backward");
+        Menu menuInference = new Menu("Wnioskowanie");
+        MenuItem forward = new MenuItem("W przód");
+        MenuItem backward = new MenuItem("W tył");
+        backward.setDisable(true);
 
         menuInference.getItems().addAll(forward, backward);
         return menuInference;
     }
 
     private Menu createHelpMenu() {
-        Menu menuHelp = new Menu("Help");
-        MenuItem about = new MenuItem("About");
+        Menu menuHelp = new Menu("Pomoc");
+        MenuItem about = new MenuItem("O programie");
 
         menuHelp.getItems().addAll(about);
         return menuHelp;
@@ -109,7 +110,7 @@ public class MainFrame extends Application {
         if (selectedFile != null) {
             try {
                 Knowledge knowledge = new KnowledgeReader().loadKnowledge(selectedFile);
-                LOGGER.log(Level.INFO, "{0} loaded", selectedFile.getName());
+                LOGGER.log(Level.INFO, "wczytano {0}", selectedFile.getName());
                 showSuccessAlert();
             } catch (KnowledgeReaderException exception) {
                 LOGGER.log(Level.SEVERE, exception.getMessage());
@@ -124,8 +125,8 @@ public class MainFrame extends Application {
 
     private void showErrorAlert(Exception exception) {
         Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Knowledge reading error");
-        alert.setHeaderText("Error occurred during loading knowledge base");
+        alert.setTitle("Błąd wczytywania wiedzy");
+        alert.setHeaderText("Wystąpił błąd podczas wczytywania bazy wiedzy");
         alert.setContentText(exception.getMessage());
         alert.setResizable(true);
 
@@ -134,7 +135,7 @@ public class MainFrame extends Application {
         exception.printStackTrace(pw);
         String exceptionText = sw.toString();
 
-        Label label = new Label("The exception stacktrace was:");
+        Label label = new Label("Szczegóły:");
 
         TextArea textArea = new TextArea(exceptionText);
         textArea.setEditable(false);
@@ -161,9 +162,9 @@ public class MainFrame extends Application {
 
     private void showSuccessAlert() {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Success");
+        alert.setTitle("Sukces");
         alert.setHeaderText(null);
-        alert.setContentText("Knowledge base has been successfully loaded");
+        alert.setContentText("Baza wiedzy została poprawnie wczytana");
 
         alert.showAndWait();
     }
