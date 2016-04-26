@@ -58,8 +58,9 @@ public class MainFrame extends Application {
         Menu menuFile = createFileMenu();
         Menu menuInference = createInferenceMenu();
         Menu menuHelp = createHelpMenu();
+        Menu menuEdit = createEditMenu();
 
-        menuBar.getMenus().addAll(menuFile, menuInference, menuHelp);
+        menuBar.getMenus().addAll(menuFile, menuEdit, menuInference, menuHelp);
         root.setTop(menuBar);
     }
 
@@ -73,6 +74,17 @@ public class MainFrame extends Application {
 
         menuFile.getItems().addAll(openFile, exit);
         return menuFile;
+    }
+    
+    private Menu createEditMenu() {
+        Menu menuEdit = new Menu("Edycja");
+        
+        MenuItem editKnowledge = new MenuItem("Baza wiedzy");
+        MenuItem editModel = new MenuItem("Model");
+        MenuItem editConstraints = new MenuItem("Ograniczenia");
+
+        menuEdit.getItems().addAll(editKnowledge, editModel, editConstraints);
+        return menuEdit;
     }
 
     private Menu createInferenceMenu() {
