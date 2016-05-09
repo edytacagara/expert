@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.MenuBar?>
+
+<MenuBar 
+  xmlns="http://javafx.com/javafx/8.0.40"
+  xmlns:fx="http://javafx.com/fxml/1" 
+  fx:controller="pl.expert.ui.MenuController">
+  <menus>
+    <Menu 
+      mnemonicParsing="false" 
+      text="Plik">
+      <items>
+        <MenuItem 
+          fx:id="openFileMenuItem" 
+          mnemonicParsing="false"
+          onAction="#openFileAction" 
+          text="Ładowanie bazy wiedzy" />
+        <MenuItem 
+          fx:id="exitMenuItem" 
+          mnemonicParsing="false"
+          onAction="#exitAction" 
+          text="Wyjście" />
+      </items>
+    </Menu>
+    <Menu 
+      mnemonicParsing="false" 
+      text="Edycja">
+      <items>
+        <MenuItem 
+          fx:id="editRulesMenuItem" 
+          mnemonicParsing="false"
+          onAction="#editRulesAction" 
+          text="Baza wiedzy" />
+        <MenuItem 
+          mnemonicParsing="false"
+          text="Model" />
+        <MenuItem 
+          mnemonicParsing="false"
+          text="Ograniczenia" />
+      </items>
+    </Menu>
+    <Menu 
+      mnemonicParsing="false" 
+      text="Wnioskowanie">
+      <items>
+        <MenuItem 
+          fx:id="forwardInferenceMenuItem" 
+          mnemonicParsing="false"
+          onAction="#forwardInferenceAction" 
+          text="W przód" />
+      <MenuItem 
+          mnemonicParsing="false"
+          text="W tył" 
+          disable="true" />
+      </items>
+    </Menu>
+    <Menu 
+      mnemonicParsing="false" 
+      text="Pomoc">
+      <items>
+        <MenuItem
+          mnemonicParsing="false"
+          text="O programie" />
+      </items>
+    </Menu>
+  </menus>
+</MenuBar>
