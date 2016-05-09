@@ -1,35 +1,78 @@
 <?xml version="1.0"?>
 <knowledge>
-
-	<rules>
+    
+        <rules>
 		<rule>
-			<conditions>A,B,C</conditions>
-			<result>D</result>
+			<conditions>niewyspanie,apatia</conditions>
+			<result>ciagle przemeczenie</result>
 		</rule>
 		<rule>
-			<conditions>C</conditions>
-			<result>E</result>
+			<conditions>zycie w silnym stresie,przepracowanie</conditions>
+			<result>ciagle przemeczenie</result>
+		</rule>
+		<rule>
+			<conditions>ciagle przemeczenie,bladosc skory</conditions>
+			<result>niedobor zelaza</result>
+		</rule>
+		<rule>
+			<conditions>sucha skora,oslabione wlosy/paznokcie</conditions>
+			<result>brak witamin</result>
+		</rule>
+		<rule>
+			<conditions>wegetarianizm,dieta malo zroznicowana</conditions>
+			<result>zla dieta</result>
+		</rule>
+		<rule>
+			<conditions>niedobor zelaza,oslabiona pamiec/koncentracja</conditions>
+			<result>ANEMIA</result>
+		</rule>
+		<rule>
+			<conditions>erytrocyty w normie,hemoglobina ponizej normy</conditions>
+			<result>ANEMIA</result>
+		</rule>
+		<rule>
+			<conditions>zla dieta,zawroty glowy,brak witamin</conditions>
+			<result>ANEMIA</result>
+		</rule>
+		<rule>
+			<conditions>kobieta,erytrocyty ponizej normy,brak utraty duzej ilosci krwi,ciaza</conditions>
+			<result>ANEMIA</result>
+		</rule>
+		<rule>
+			<conditions>utrata duzej ilosci krwi,obnizone cisnienie</conditions>
+			<result>ANEMIA</result>
 		</rule>
 	</rules>
 
 	<models>
 		<model>
-			<argument>temperatura</argument>
-			<operator>gt,lt</operator>
-			<value>36.0,37.0</value>
-			<result>temperatura normalna</result>
+			<argument>Poziom erytrocytow(mln/ul):</argument>
+			<operator>lt</operator>
+			<value>3.50</value>
+			<result>erytrocyty ponizej normy</result>
 		</model>
 		<model>
-			<argument>temperatura</argument>
+			<argument>Poziom erytrocytow(mln/ul):</argument>
+			<operator>gt,lt</operator>
+			<value>3.50,5.00</value>
+			<result>erytrocyty w normie</result>
+		</model>
+		<model>
+			<argument>Poziom erytrocytow(mln/ul):</argument>
+			<operator>ge</operator>
+			<value>5.00</value>
+			<result>erytrocyty powyzej normy</result>
+		</model>
+		<model>
+			<argument>Poziom hemoglobiny(g/dl):</argument>
 			<operator>lt</operator>
-			<value>36.0</value>
-			<result>temperatura niska</result>
+			<value>11.00</value>
+			<result>hemoglobina ponizej normy</result>
 		</model>
 	</models>
 	
 	<constraints>
-		<constraint>A,C</constraint>
-		<constraint>C,F</constraint>
+		<constraint>utrata duzej ilosci krwi,brak utraty duzej ilosci krwi</constraint>
 	</constraints>
 	
 </knowledge>
