@@ -1,0 +1,12 @@
+Algorytm wnioskowania:
+
+dla każdej reguły:
+	sprawdzamy czy jest rozwiązana
+		jezeli nie jest rozwiazana to:
+			jezeli jest w modelu
+				to rozwiazujemy model jezeli nie jest rozwiazany + obsluga constraint
+			jezeli nie ma w modelu 
+				to pytamy uzytkownika + obsluga constraint
+		jezeli jest rozwiazana
+			jest prawda to sprawdzamy kolejny
+			jest nie prawda to result jest nie prawdziwy i idziemy do kolejnej reguly			
