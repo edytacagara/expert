@@ -9,7 +9,7 @@ package pl.expert.core.exception;
  *
  * @author Mariusz Batyra
  */
-public class KnowledgeReaderException extends Exception {
+public class KnowledgeReaderException extends ExpertSystemException {
 
     public KnowledgeReaderException(String message) {
         super(message);

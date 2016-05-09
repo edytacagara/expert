@@ -6,41 +6,37 @@
 package pl.expert.ui;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pl.expert.core.database.knowledge.Knowledge;
 import pl.expert.core.database.reader.KnowledgeReader;
 import pl.expert.core.exception.KnowledgeReaderException;
+import pl.expert.ui.inference.InferenceDialog;
+import pl.expert.ui.exception.UIException;
+import pl.expert.utils.MessageDialogs;
 
 public class MainFrame extends Application {
 
     private final static Logger LOGGER = Logger.getLogger(MainFrame.class.getName());
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
+    private Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
 
@@ -75,10 +71,10 @@ public class MainFrame extends Application {
         menuFile.getItems().addAll(openFile, exit);
         return menuFile;
     }
-    
+
     private Menu createEditMenu() {
         Menu menuEdit = new Menu("Edycja");
-        
+
         MenuItem editKnowledge = new MenuItem("Baza wiedzy");
         MenuItem editModel = new MenuItem("Model");
         MenuItem editConstraints = new MenuItem("Ograniczenia");
@@ -90,8 +86,18 @@ public class MainFrame extends Application {
     private Menu createInferenceMenu() {
         Menu menuInference = new Menu("Wnioskowanie");
         MenuItem forward = new MenuItem("W przód");
+        forward.setId("forward");
         MenuItem backward = new MenuItem("W tył");
         backward.setDisable(true);
+
+        forward.setOnAction((value) -> {
+            try {
+                this.createInferenceForwardDialog();
+            } catch (UIException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, "Błąd podczas tworzenia dialogu wnioskowania", ex);
+                MessageDialogs.showErrorAlert(ex.getMessage(), ex);
+            }
+        });
 
         menuInference.getItems().addAll(forward, backward);
         return menuInference;
@@ -123,61 +129,21 @@ public class MainFrame extends Application {
             try {
                 Knowledge knowledge = new KnowledgeReader().loadKnowledge(selectedFile);
                 LOGGER.log(Level.INFO, "wczytano {0}", selectedFile.getName());
-                showSuccessAlert();
+                MessageDialogs.showSuccessAlert("Baza wiedzy została poprawnie wczytana");
             } catch (KnowledgeReaderException exception) {
                 LOGGER.log(Level.SEVERE, exception.getMessage());
-                showErrorAlert(exception);
+                MessageDialogs.showErrorAlert("Wystąpił błąd podczas wczytywania bazy wiedzy", exception);
             }
         }
+    }
+
+    private void createInferenceForwardDialog() throws UIException {
+        InferenceDialog dialog = new InferenceDialog(primaryStage);
+        dialog.showDialog();
     }
 
     private void handleExitAction(ActionEvent actionEvent) {
         System.exit(0);
     }
 
-    private void showErrorAlert(Exception exception) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Błąd wczytywania wiedzy");
-        alert.setHeaderText("Wystąpił błąd podczas wczytywania bazy wiedzy");
-        alert.setContentText(exception.getMessage());
-        alert.setResizable(true);
-
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        exception.printStackTrace(pw);
-        String exceptionText = sw.toString();
-
-        Label label = new Label("Szczegóły:");
-
-        TextArea textArea = new TextArea(exceptionText);
-        textArea.setEditable(false);
-        textArea.setWrapText(true);
-
-        textArea.setMaxWidth(Double.MAX_VALUE);
-        textArea.setMaxHeight(Double.MAX_VALUE);
-        GridPane.setVgrow(textArea, Priority.ALWAYS);
-        GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-        GridPane expContent = new GridPane();
-        expContent.setMaxWidth(Double.MAX_VALUE);
-        expContent.add(label, 0, 0);
-        expContent.add(textArea, 0, 1);
-
-        alert.getDialogPane().getChildren()
-            .stream()
-            .filter(node -> node instanceof Label)
-            .forEach(node -> ((Label) node).setMinHeight(Region.USE_PREF_SIZE));
-        alert.getDialogPane().setExpandableContent(expContent);
-
-        alert.showAndWait();
-    }
-
-    private void showSuccessAlert() {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Sukces");
-        alert.setHeaderText(null);
-        alert.setContentText("Baza wiedzy została poprawnie wczytana");
-
-        alert.showAndWait();
-    }
 }
