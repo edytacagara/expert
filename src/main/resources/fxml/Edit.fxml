@@ -6,9 +6,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="pl.expert.ui.EditController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" 
+            xmlns="http://javafx.com/javafx/8" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="pl.expert.ui.EditController">
    <children>
-      <Label layoutX="195.0" layoutY="184.0" text="Edycja" />
+      <Button layoutX="540.0" layoutY="14.0" mnemonicParsing="false" onAction="#addButtonAction" 
+              text="Dodaj" />
+      <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="380.0" prefWidth="515.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="497.0">
+               <children>
+                  <ListView fx:id="list" prefHeight="380.0" prefWidth="513.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -35,6 +34,7 @@ public class MenuController {
         if (selectedFile != null) {
             try {
                 Knowledge knowledge = new KnowledgeReader().loadKnowledge(selectedFile);
+                MainFrame.setKnowledge(knowledge);
                 LOGGER.log(Level.INFO, "wczytano {0}", selectedFile.getName());
                 MessageDialogs.showSuccessAlert("Baza wiedzy została poprawnie wczytana");
             } catch (KnowledgeReaderException exception) {
@@ -53,8 +53,10 @@ public class MenuController {
     public void editRulesAction(ActionEvent actionEvent) {
         try {
             URL editUrl = getClass().getResource("/fxml/Edit.fxml");
+
             AnchorPane editView = FXMLLoader.load(editUrl);
             BorderPane border = MainFrame.getRoot();
+
             border.setCenter(editView);
         } catch (IOException e) {
             e.printStackTrace();

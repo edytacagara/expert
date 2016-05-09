@@ -5,6 +5,7 @@
  */
 package pl.expert.core.database.knowledge;
 
+import com.google.common.base.Joiner;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,4 +44,8 @@ public class Rule implements Serializable {
         this.result = result;
     }
 
+    @Override
+    public String toString() {
+        return Joiner.on(" i ").join(conditions) + " -> " + result;
+    }
 }
