@@ -3,9 +3,12 @@
  * Copyright (c) 2015-2016 IT Students of 5th year 
  * at the University of Maria Curie-Sklodowska in Lublin 
  */
-package pl.expert.core.engine;
+package pl.expert.core.engine.resolver;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pl.expert.core.database.knowledge.Model;
 import pl.expert.core.engine.expression.Comparator;
 import pl.expert.core.engine.expression.OperatorEnum;
@@ -16,7 +19,27 @@ import pl.expert.core.engine.expression.OperatorEnum;
  */
 public class ModelResolver {
 
-    public static boolean resolve(final BigDecimal userValue, final Model model) {
+    private static final Logger LOG = Logger.getLogger(ModelResolver.class.getName());
+
+    public static void resolve(final List<Model> models, final String condition) {
+        if (Resolved.get(condition) != null) {
+            LOG.log(Level.INFO, "Condition: {0} is already resolved", condition);
+            return;
+        }
+        for (Model model : models) {
+            if (condition.equalsIgnoreCase(model.getResult())) {
+                // TODO zapamietac argumenty aby nie pytac np 2 razy o temp
+                BigDecimal userValue = UserAnswerReader.readBigDecimal(model.getArgument());
+                boolean resolve = resolveModel(userValue, model);
+                model.setResolved(resolve);
+                Resolved.put(condition, resolve);
+                LOG.log(Level.INFO, "Model Condition: {0} was resolved: {1}", new Object[]{condition, resolve});
+                return;
+            }
+        }
+    }
+
+    private static boolean resolveModel(final BigDecimal userValue, final Model model) {
         if (model.getResolved() != null) {
             return model.getResolved();
         }
