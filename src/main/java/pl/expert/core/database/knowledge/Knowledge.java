@@ -17,7 +17,7 @@ public class Knowledge implements Serializable {
 
     private List<Rule> rules;
     private List<Model> models;
-    private List<String> constraints;
+    private List<Constraint> constraints;
 
     public Knowledge() {
         rules = new ArrayList<>();
@@ -25,7 +25,7 @@ public class Knowledge implements Serializable {
         constraints = new ArrayList<>();
     }
 
-    public Knowledge(List<Rule> rules, List<Model> models, List<String> constraints) {
+    public Knowledge(List<Rule> rules, List<Model> models, List<Constraint> constraints) {
         this.rules = rules;
         this.models = models;
         this.constraints = constraints;
@@ -47,11 +47,11 @@ public class Knowledge implements Serializable {
         this.models = models;
     }
 
-    public List<String> getConstraints() {
+    public List<Constraint> getConstraints() {
         return constraints;
     }
 
-    public void setConstraints(List<String> constraints) {
+    public void setConstraints(List<Constraint> constraints) {
         this.constraints = constraints;
     }
 

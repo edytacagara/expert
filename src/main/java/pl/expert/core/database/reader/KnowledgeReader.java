@@ -10,6 +10,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
+import pl.expert.core.database.knowledge.Constraint;
 import pl.expert.core.database.knowledge.Knowledge;
 import pl.expert.core.database.knowledge.Model;
 import pl.expert.core.database.knowledge.Rule;
@@ -26,7 +27,7 @@ public class KnowledgeReader {
         try {
             List<Rule> ruleList = RuleReader.readRuleList(document);
             List<Model> modelList = ModelReader.readModelList(document);
-            List<String> constraintList = ConstraintReader.readConstraintList(document);
+            List<Constraint> constraintList = ConstraintReader.readConstraintList(document);
 
             Knowledge knowledge = new Knowledge(ruleList, modelList, constraintList);
             return knowledge;

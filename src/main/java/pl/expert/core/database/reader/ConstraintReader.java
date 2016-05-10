@@ -12,6 +12,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import pl.expert.core.database.knowledge.Constraint;
 import pl.expert.utils.XMLTagConst;
 import pl.expert.utils.SpecialCharacterConst;
 
@@ -21,16 +22,16 @@ import pl.expert.utils.SpecialCharacterConst;
  */
 public class ConstraintReader {
 
-    public static List<String> readConstraintList(Document document) {
-        final List<String> constraints = new ArrayList<>();
+    public static List<Constraint> readConstraintList(Document document) {
+        final List<Constraint> constraints = new ArrayList<>();
         Node constraintsListNode = document.getElementsByTagName(XMLTagConst.CONSTRAINTS_TAG).item(0);
         Element constraintsElement = (Element) constraintsListNode;
         NodeList constraintsList = constraintsElement.getElementsByTagName(XMLTagConst.CONSTRAINT_TAG);
         for (int i = 0; i < constraintsList.getLength(); i++) {
             Element constraintElem = (Element) constraintsList.item(i);
             String constraintStr = constraintElem.getChildNodes().item(0).getNodeValue();
-
-            constraints.addAll(constraintsAsList(constraintStr));
+            
+            constraints.add(new Constraint(constraintsAsList(constraintStr)));
         }
         return constraints;
     }
