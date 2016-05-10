@@ -28,19 +28,11 @@ public class MenuController {
     private final static Logger LOGGER = Logger.getLogger(MainFrame.class.getName());
 
     @FXML
-    public void openFileAction(ActionEvent actionEvent) {
+    public void openFileAction(ActionEvent actionEvent) throws IOException {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            try {
-                Knowledge knowledge = new KnowledgeReader().loadKnowledge(selectedFile);
-                MainFrame.setKnowledge(knowledge);
-                LOGGER.log(Level.INFO, "wczytano {0}", selectedFile.getName());
-                MessageDialogs.showSuccessAlert("Baza wiedzy została poprawnie wczytana");
-            } catch (KnowledgeReaderException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-                MessageDialogs.showErrorAlert("Wystąpił błąd podczas wczytywania bazy wiedzy", exception);
-            }
+            loadFile(selectedFile);
         }
     }
 
@@ -50,11 +42,14 @@ public class MenuController {
     }
 
     @FXML
-    public void editRulesAction(ActionEvent actionEvent) {        
+    public void editRulesAction(ActionEvent actionEvent) {
+        //uncomment to autoload knowledge base
+//        loadFileForTestPurposes();
+        
         if (!checkIfKnowledgeBaseLoaded()) {
             return;
         }
-        
+
         try {
             URL editUrl = getClass().getResource("/fxml/Edit.fxml");
 
@@ -72,7 +67,7 @@ public class MenuController {
         if (!checkIfKnowledgeBaseLoaded()) {
             return;
         }
-        
+
         try {
             this.createInferenceForwardDialog();
         } catch (UIException ex) {
@@ -82,16 +77,34 @@ public class MenuController {
         }
     }
 
+    private void loadFile(File file) {
+        try {
+            Knowledge knowledge = new KnowledgeReader().loadKnowledge(file);
+            MainFrame.setKnowledge(knowledge);
+            LOGGER.log(Level.INFO, "wczytano {0}", file.getName());
+            MessageDialogs.showSuccessAlert("Baza wiedzy została poprawnie wczytana");
+        } catch (KnowledgeReaderException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+            MessageDialogs.showErrorAlert("Wystąpił błąd podczas wczytywania bazy wiedzy", exception);
+        }
+    }
+
     private void createInferenceForwardDialog() throws UIException {
         InferenceDialog dialog = new InferenceDialog(MainFrame.getStage());
         dialog.showDialog();
     }
-    
+
     private boolean checkIfKnowledgeBaseLoaded() {
         if (MainFrame.getKnowledge() == null) {
             MessageDialogs.showSimpleErrorAlert("Nie wczytano jeszcze bazy wiedzy");
             return false;
         }
         return true;
+    }
+    
+    private void loadFileForTestPurposes() {
+        String kzagrabaKnowledgeBaseFilePath = "/home/kzagraba/workspace/expert/src/main/resources/knowledge.xml";
+        File file = new File(kzagrabaKnowledgeBaseFilePath);
+        loadFile(file);
     }
 }

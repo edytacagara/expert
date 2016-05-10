@@ -7,7 +7,6 @@ package pl.expert.ui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,8 +18,8 @@ import pl.expert.core.database.knowledge.Knowledge;
 
 public class MainFrame extends Application {
 
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 800;
     private static Stage primaryStage;
     private static Knowledge knowledge;
 
