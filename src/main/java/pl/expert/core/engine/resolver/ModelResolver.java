@@ -28,11 +28,11 @@ public class ModelResolver {
         }
         for (Model model : models) {
             if (condition.equalsIgnoreCase(model.getResult())) {
-                // TODO zapamietac argumenty aby nie pytac np 2 razy o temp
                 BigDecimal userValue = UserAnswerReader.readBigDecimal(model.getArgument());
                 boolean resolve = resolveModel(userValue, model);
                 model.setResolved(resolve);
                 Resolved.put(condition, resolve);
+                resolveWithRequestedArgument(models, model.getArgument(), userValue);
                 LOG.log(Level.INFO, "Model Condition: {0} was resolved: {1}", new Object[]{condition, resolve});
                 return;
             }
@@ -74,6 +74,16 @@ public class ModelResolver {
 
         return Comparator.compare(value1, userValue, operatorEnum1)
                 && Comparator.compare(userValue, value2, operatorEnum2);
+    }
+
+    private static void resolveWithRequestedArgument(final List<Model> models, final String argument, final BigDecimal userValue) {
+        for (Model i : models) {
+            if (i.getArgument().equalsIgnoreCase(argument)) {
+                boolean resolve = resolveModel(userValue, i);
+                i.setResolved(resolve);
+                Resolved.put(i.getResult(), resolve);
+            }
+        }
     }
 
 }
