@@ -20,6 +20,7 @@ public class Model implements Serializable {
     private List<String> operators;
     private List<BigDecimal> values;
     private String result;
+    private Boolean resolved;
 
     public Model() {
         operators = new ArrayList<>();
@@ -63,6 +64,14 @@ public class Model implements Serializable {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public Boolean getResolved() {
+        return resolved;
+    }
+
+    public void setResolved(Boolean resolved) {
+        this.resolved = resolved;
     }
 
 }
