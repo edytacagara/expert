@@ -50,7 +50,11 @@ public class MenuController {
     }
 
     @FXML
-    public void editRulesAction(ActionEvent actionEvent) {
+    public void editRulesAction(ActionEvent actionEvent) {        
+        if (!checkIfKnowledgeBaseLoaded()) {
+            return;
+        }
+        
         try {
             URL editUrl = getClass().getResource("/fxml/Edit.fxml");
 
@@ -65,6 +69,10 @@ public class MenuController {
 
     @FXML
     public void forwardInferenceAction(ActionEvent event) {
+        if (!checkIfKnowledgeBaseLoaded()) {
+            return;
+        }
+        
         try {
             this.createInferenceForwardDialog();
         } catch (UIException ex) {
@@ -77,5 +85,13 @@ public class MenuController {
     private void createInferenceForwardDialog() throws UIException {
         InferenceDialog dialog = new InferenceDialog(MainFrame.getStage());
         dialog.showDialog();
+    }
+    
+    private boolean checkIfKnowledgeBaseLoaded() {
+        if (MainFrame.getKnowledge() == null) {
+            MessageDialogs.showSimpleErrorAlert("Nie wczytano jeszcze bazy wiedzy");
+            return false;
+        }
+        return true;
     }
 }

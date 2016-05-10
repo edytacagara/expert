@@ -56,6 +56,13 @@ public class MessageDialogs {
         alert.getDialogPane().setExpandableContent(expContent);
         alert.showAndWait();
     }
+    
+    public static void showSimpleErrorAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Wystąpił błąd");
+        alert.setHeaderText(message);
+        alert.showAndWait();
+    }
 
     public static void showSuccessAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
