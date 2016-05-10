@@ -5,6 +5,9 @@
  */
 package pl.expert.core.engine;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,9 +48,28 @@ public class Engine {
         }
         for (Model model : models) {
             if (condition.equalsIgnoreCase(model.getResult())) {
-                // TODO resolve model
+                // TODO zapamietac argumenty aby nie pytac np 2 razy o temp
+                BigDecimal userValue = read(model.getArgument());
+                boolean resolve = ModelResolver.resolve(userValue, model);
+                model.setResolved(resolve);
+                resolved.put(condition, resolve);
+                LOG.log(Level.INFO, "Model Condition: {0} was resolved: {1}", new Object[]{condition, resolve});
+                return;
             }
         }
+    }
+
+    private BigDecimal read(String question) {
+        System.out.println(question);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String str = bufferedReader.readLine();
+            return new BigDecimal(str);
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, "Error while input reading! {0}", e.getMessage());
+            return null;
+        }
+
     }
 
 }
