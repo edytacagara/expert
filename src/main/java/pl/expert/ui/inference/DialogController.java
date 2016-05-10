@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import pl.expert.core.engine.Engine;
+import pl.expert.ui.MainFrame;
 
 /**
  * FXML Controller class
@@ -50,6 +52,14 @@ public class DialogController implements Initializable {
     @FXML
     private void close() {
         this.inferenceInterface.onClose();
+    }
+
+    public void doMagic() {
+        Thread thread = new Thread(() -> {
+            Engine engine = new Engine();
+            engine.doMagic(MainFrame.getKnowledge());
+        });
+        thread.start();
     }
 
     /**

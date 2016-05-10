@@ -5,10 +5,16 @@
  */
 package pl.expert.core.engine;
 
+import pl.expert.core.database.knowledge.Knowledge;
+
 /**
  *
  * @author Mariusz Batyra
  */
 public class Engine {
+
+    public void doMagic(final Knowledge knowledge) {
+        // TODO
+    }
 
 }
