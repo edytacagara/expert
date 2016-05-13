@@ -12,7 +12,7 @@
 		</rule>
 		<rule>
 			<conditions>ciagle przemeczenie,bladosc skory</conditions>
-			<result>niedobor zelaza</result>
+			<result>latwa meczliwosc</result>
 		</rule>
 		<rule>
 			<conditions>sucha skora,oslabione wlosy/paznokcie</conditions>
@@ -23,56 +23,157 @@
 			<result>zla dieta</result>
 		</rule>
 		<rule>
-			<conditions>niedobor zelaza,oslabiona pamiec/koncentracja</conditions>
-			<result>ANEMIA</result>
+			<conditions>latwa meczliwosc,oslabiona pamiec/koncentracja,hematokryt ponizej normy</conditions>
+			<result>ogolne objawy anemii</result>
 		</rule>
 		<rule>
 			<conditions>erytrocyty w normie,hemoglobina ponizej normy</conditions>
-			<result>ANEMIA</result>
+			<result>ogolne objawy anemii</result>
 		</rule>
 		<rule>
 			<conditions>zla dieta,zawroty glowy,brak witamin</conditions>
-			<result>ANEMIA</result>
+			<result>ogolne objawy anemii</result>
 		</rule>
 		<rule>
-			<conditions>kobieta,erytrocyty ponizej normy,brak utraty duzej ilosci krwi,ciaza</conditions>
-			<result>ANEMIA</result>
+			<conditions>kobieta w ciazy,erytrocyty ponizej normy,brak utraty duzej ilosci krwi,zla dieta</conditions>
+			<result>ANEMIA W CIAZY</result>
 		</rule>
-		<rule>
-			<conditions>utrata duzej ilosci krwi,obnizone cisnienie</conditions>
-			<result>ANEMIA</result>
-		</rule>
+                <rule>
+                        <conditions>naduzywanie alkoholu,palenie papierosow</conditions>
+                        <result>uzywki</result>
+                </rule>
+               <rule>
+                        <conditions>niewystarczajaca aktywnosc fizyczna lub jej brak,dieta bogata w tluszcze</conditions>
+                        <result>niezdrowy tryb zycia</result>
+                </rule>
+                <rule>
+                        <conditions>choroba przewlekla,niezdrowy tryb zycia,uzywki</conditions>
+                        <result>ANEMIA CHOROB PRZEWLEKLYCH</result>
+                </rule>
+                <rule>
+                        <conditions>utrata duzej ilosci krwi,obnizone cisnienie</conditions>
+                        <result>ANEMIA POKRWOTOCZNA</result>
+                </rule>
+                <rule>
+                        <conditions>ANEMIA POKRWOTOCZNA,ogolne objawy anemii</conditions>
+                        <result>ANEMIA Z NIEDOBORU ZELAZA</result>
+                </rule> 
+                <rule>
+                        <conditions>niedobor zelaza,niedobor ferrytyny</conditions>
+                        <result>ANEMIA Z NIEDOBORU ZELAZA</result>
+                </rule>
+                <rule>
+                        <conditions>spadek poziomu ferrytyny w czasie (jednak nadal w granicach normy),spadek poziomu zelaza w czasie (jednak nadal w granicach normy)</conditions>
+                        <result>tendencja do anemii</result>
+                </rule> 
+                <rule>
+                        <conditions>tendencja do anemii,brak poprawy stanu zdrowia w czasie</conditions>
+                        <result>ANEMIA Z NIEDOBORU ZELAZA</result>
+                </rule>
+                <rule>
+                        <conditions>uzywki,wegetarianizm</conditions>
+                        <result>niedobor witaminy B12</result>
+                </rule> 
+                <rule>
+                        <conditions>choroba Addisona i Biermera,zaburzenia wchlaniania wit.B12 w przewodzie pokarmowym</conditions>
+                        <result>niedobor witaminy B12</result>
+                </rule>
+                <rule>
+                        <conditions>niedobor witaminy B12,zmniejszenie masy ciala o 5-15kg</conditions>
+                        <result>ANEMIA Z NIEDOBORU WITAMINY B12</result>
+                </rule> 
+                <rule>
+                        <conditions>utrata smaku,pieczenie jezyka,nudnosci,biegunka/zaparcia</conditions>
+                        <result>ANEMIA Z NIEDOBORU WITAMINY B12</result>
+                </rule>
+                <rule>
+                        <conditions>ogolne objawy anemii,nabyte bielactwo</conditions>
+                        <result>ANEMIA Z NIEDOBORU WITAMINY B12</result>
+                </rule> 
+                <rule>
+                        <conditions>ogolne objawy anemii,bol brzucha,przyspieszone tetno</conditions>
+                        <result>ANEMIA HEMOLITYCZNA</result>
+                </rule>
+                <rule>
+                        <conditions>goraczka,nudnosci,erytrocyty ponizej normy</conditions>
+                        <result>ANEMIA HEMOLITYCZNA</result>
+                </rule> 
+                <rule>
+                        <conditions>dieta malo zroznicowana,kobieta w ciazy,brak sumplementacji kwasu foliowego</conditions>
+                        <result>niedobor kwasu foliowego</result>
+                </rule>
+                <rule>
+                        <conditions>naduzywanie alkoholu,ANEMIA HEMOLITYCZNA</conditions>
+                        <result>niedobor kwasu foliowego</result>
+                </rule> 
+                <rule>
+                        <conditions>niedobor cynku,zaburzenia trawienia i wchlaniania</conditions>
+                        <result>niedobor kwasu foliowego</result>
+                </rule>
+                <rule>
+                        <conditions>niedobor kwasu foliowego,zmniejszenie masy ciala o 5-15kg,utrata smaku</conditions>
+                        <result>ANEMIA Z NIEDOBORU KWASU FOLIOWEGO</result>
+                </rule> 
+                <rule>
+                        <conditions>zawroty glowy,szum w uszach,zaburzenia widzenia</conditions>
+                        <result>objawy czerwienicy</result>
+                </rule>
+                <rule>
+                        <conditions>duzy wzrost liczby leukocytow w czasie,duzy wzrost liczby plytek krwi w czasie</conditions>
+                        <result>objawy czerwienicy</result>
+                </rule> 
+                <rule>
+                        <conditions>erytrocyty powyzej normy,objawy czerwienicy</conditions>
+                        <result>CZERWIENICA PRAWDZIWA(NADKRWISTOSC)</result>
+                </rule>
+                <rule>
+                        <conditions>nienaturalne zaczerwienienie skory twarzy/rak/stop/uszu,swiad skory po kontakcie z goraca woda</conditions>
+                        <result>CZERWIENICA PRAWDZIWA(NADKRWISTOSC)</result>
+                </rule>
+                <rule>
+                        <conditions>krwawienie z nosa,nadcisnienie tetnicze</conditions>
+                        <result>CZERWIENICA PRAWDZIWA(NADKRWISTOSC)</result>
+                </rule>
 	</rules>
 
 	<models>
 		<model>
-			<argument>Poziom erytrocytow(mln/ul):</argument>
+			<argument>Poziom erytrocytow(mln/ul)[norma od 3.5 do 5.0]:</argument>
 			<operator>lt</operator>
 			<value>3.50</value>
 			<result>erytrocyty ponizej normy</result>
 		</model>
 		<model>
-			<argument>Poziom erytrocytow(mln/ul):</argument>
+			<argument>Poziom erytrocytow(mln/ul)[norma od 3.5 do 5.0]:</argument>
 			<operator>gt,lt</operator>
 			<value>3.50,5.00</value>
 			<result>erytrocyty w normie</result>
 		</model>
 		<model>
-			<argument>Poziom erytrocytow(mln/ul):</argument>
+			<argument>Poziom erytrocytow(mln/ul)[norma od 3.5 do 5.0]:</argument>
 			<operator>ge</operator>
 			<value>5.00</value>
 			<result>erytrocyty powyzej normy</result>
 		</model>
 		<model>
-			<argument>Poziom hemoglobiny(g/dl):</argument>
+			<argument>Poziom hemoglobiny(g/dl)[norma od 11.0 do 16.0]:</argument>
 			<operator>lt</operator>
 			<value>11.00</value>
 			<result>hemoglobina ponizej normy</result>
 		</model>
+                <model>
+			<argument>Poziom hematokrytu(%)[norma od 35.0 do 50.0]:</argument>
+			<operator>lt</operator>
+			<value>35.00</value>
+			<result>hematokryt ponizej normy</result>
+		</model>
+                
 	</models>
 	
 	<constraints>
 		<constraint>utrata duzej ilosci krwi,brak utraty duzej ilosci krwi</constraint>
-	</constraints>
+        	<constraint>niedobor zelaza,spadek poziomu zelaza w czasie (jednak nadal w granicach normy)</constraint>
+                <constraint>niedobor ferrytyny,spadek poziomu ferrytyny w czasie (jednak nadal w granicach normy)</constraint>
+        </constraints>
 	
 </knowledge>
