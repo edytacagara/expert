@@ -5,7 +5,6 @@
  */
 package pl.expert.ui;
 
-import com.google.common.collect.Lists;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -13,12 +12,19 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
 import pl.expert.core.database.knowledge.Knowledge;
 import pl.expert.core.database.knowledge.Rule;
 
 public class EditController implements Initializable {
     
     private Knowledge knowledge;
+    
+    @FXML
+    private Pane testPane;
+    
+//    @FXML
+//    private Button addEditButton;
 
     @FXML
     private ListView<Rule> list;
@@ -29,6 +35,7 @@ public class EditController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        testPane.setVisible(false);
         knowledge = MainFrame.getKnowledge();
         knowledge.getRules().forEach(rule -> items.add(rule));
         list.setItems(items);
@@ -39,9 +46,10 @@ public class EditController implements Initializable {
     }
 
     public void addButtonAction() { 
-        Rule rule = new Rule(Lists.newArrayList("testWarunek1", "testWarunek2"), "testWniosek");
-        knowledge.getRules().add(rule);
-        items.add(rule);
-        list.setItems(items);
+        testPane.setVisible(false);
+//        Rule rule = new Rule(Lists.newArrayList("testWarunek1", "testWarunek2"), "testWniosek");
+//        knowledge.getRules().add(rule);
+//        items.add(rule);
+//        list.setItems(items);
     }
 }
