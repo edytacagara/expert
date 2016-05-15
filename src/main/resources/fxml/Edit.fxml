@@ -21,21 +21,22 @@
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0">
                     <children>
-                        <Pane fx:id="testPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.topAnchor="0" >
+                        <Pane fx:id="testPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.topAnchor="0">
                             <children>
                                 <Label text="TEST" />
                             </children>
                         </Pane>
-                        <Pane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                        <Pane SplitPane.resizableWithParent="true"  AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
                             <children>
-                                <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                                <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" SplitPane.resizableWithParent="true">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" />
-                                        <ColumnConstraints hgrow="SOMETIMES" />
+                                        <ColumnConstraints fillWidth="true" hgrow="ALWAYS" />
                                     </columnConstraints>
                                     <rowConstraints>
-                                        <RowConstraints vgrow="SOMETIMES" />
-                                        <RowConstraints vgrow="SOMETIMES" />
+                                        <RowConstraints vgrow="ALWAYS" />
+                                        <RowConstraints vgrow="ALWAYS" />
+                                        <RowConstraints vgrow="ALWAYS" />
                                         <RowConstraints vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
@@ -43,10 +44,13 @@
                                         <Label text="Wniosek" GridPane.rowIndex="1" />
                                         <TextField fx:id="conditionsInput" promptText="Warunki" GridPane.columnIndex="1" />
                                         <TextField fx:id="resultInput" promptText="Wniosek" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                        <Button fx:id="addEditButton" mnemonicParsing="false" onAction="#addButtonAction" text="Dodaj" GridPane.columnIndex="0" GridPane.rowIndex="2" 
-                                                onMouseClicked="#saveAction" />
-                                        <Button mnemonicParsing="false" onAction="#addButtonAction" text="Anuluj" GridPane.columnIndex="1" GridPane.rowIndex="2"
-                                                onMouseClicked="#cancelAction"/>
+                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" spacing="10" >
+                                            <children>
+                                                <Button fx:id="addEditButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#saveAction" text="Dodaj" />
+                                                <Button mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#cancelAction" text="Anuluj" />
+                                                <Button fx:id="removeButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#removeAction" text="Usuń" />
+                                            </children>
+                                        </HBox>
                                     </children>
                                 </GridPane>
                             </children>

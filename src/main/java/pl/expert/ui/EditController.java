@@ -5,6 +5,7 @@
  */
 package pl.expert.ui;
 
+import com.google.common.base.Strings;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import pl.expert.core.database.knowledge.Knowledge;
 import pl.expert.core.database.knowledge.Rule;
+import pl.expert.utils.MessageDialogs;
 
 public class EditController implements Initializable {
 
@@ -38,6 +40,9 @@ public class EditController implements Initializable {
 
     @FXML
     private Button addEditButton;
+
+    @FXML
+    private Button removeButton;
 
     @FXML
     private ListView<Rule> listView;
@@ -65,6 +70,7 @@ public class EditController implements Initializable {
 
     public void listElementSelected(MouseEvent event) {
         addEditButton.setText("Zapisz");
+        removeButton.setVisible(true);
         selectedRule = listView.getSelectionModel().getSelectedItem();
         selectedRuleIndex = items.indexOf(selectedRule);
         conditionsInput.setText(selectedRule.getConditionsToInput());
@@ -73,6 +79,12 @@ public class EditController implements Initializable {
 
     @FXML
     public void saveAction(MouseEvent event) {
+        
+        if (!checkIfIsRuleValid()) {
+            MessageDialogs.showSimpleErrorAlert("Zapisywana reguła jest niepoprawna");
+            return;
+        }
+        
         List<String> conditions = Arrays.asList(conditionsInput.getText().replace(" ", "").split(","));
         String result = resultInput.getText();
 
@@ -87,20 +99,44 @@ public class EditController implements Initializable {
             items.add(selectedRuleIndex, selectedRule);
             listView.getSelectionModel().clearSelection();
         }
-        cleraInputs();
+        clearInputs();
         addEditButton.setText("Dodaj");
+        removeButton.setVisible(false);
     }
 
     @FXML
     public void cancelAction(MouseEvent event) {
         listView.getSelectionModel().clearSelection();
         selectedRule = null;
-        cleraInputs();
+        clearInputs();
         addEditButton.setText("Dodaj");
+        removeButton.setVisible(false);
+    }
+    
+    @FXML
+    public void removeAction(MouseEvent event) {
+        items.remove(selectedRuleIndex);
+        listView.getSelectionModel().clearSelection();
+        selectedRule = null;
+        clearInputs();
+        addEditButton.setText("Dodaj");
+        removeButton.setVisible(false);
     }
 
-    private void cleraInputs() {
+    private void clearInputs() {
         conditionsInput.clear();
         resultInput.clear();
+    }
+    
+    private boolean checkIfIsRuleValid() {
+        if (Strings.isNullOrEmpty(conditionsInput.getText())) {
+            return false;
+        }
+        
+        if (Strings.isNullOrEmpty(resultInput.getText())) {
+            return false;
+        }
+        
+        return true;
     }
 }

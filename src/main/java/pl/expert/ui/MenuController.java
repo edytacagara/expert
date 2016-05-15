@@ -44,7 +44,7 @@ public class MenuController {
     @FXML
     public void editRulesAction(ActionEvent actionEvent) {
         //uncomment to autoload knowledge base
-        loadFileForTestPurposes();
+//        loadFileForTestPurposes();
         
         if (!checkIfKnowledgeBaseLoaded()) {
             return;
