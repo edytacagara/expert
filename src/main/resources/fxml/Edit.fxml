@@ -14,7 +14,7 @@
                     <children>
                         <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
                             <content>
-                                <ListView fx:id="list" />
+                                <ListView fx:id="listView" />
                             </content>
                         </ScrollPane>
                     </children>
@@ -28,7 +28,7 @@
                         </Pane>
                         <Pane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
                             <children>
-                                <GridPane alignment="CENTER">
+                                <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" />
                                         <ColumnConstraints hgrow="SOMETIMES" />
@@ -41,10 +41,12 @@
                                     <children>
                                         <Label text="Warunki" />
                                         <Label text="Wniosek" GridPane.rowIndex="1" />
-                                        <TextField promptText="Warunki" GridPane.columnIndex="1" />
-                                        <TextField promptText="Wniosek" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                        <Button mnemonicParsing="false" onAction="#addButtonAction" text="Dodaj" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <Button mnemonicParsing="false" onAction="#addButtonAction" text="Anuluj" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <TextField fx:id="conditionsInput" promptText="Warunki" GridPane.columnIndex="1" />
+                                        <TextField fx:id="resultInput" promptText="Wniosek" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Button fx:id="addEditButton" mnemonicParsing="false" onAction="#addButtonAction" text="Dodaj" GridPane.columnIndex="0" GridPane.rowIndex="2" 
+                                                onMouseClicked="#saveAction" />
+                                        <Button mnemonicParsing="false" onAction="#addButtonAction" text="Anuluj" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                                onMouseClicked="#cancelAction"/>
                                     </children>
                                 </GridPane>
                             </children>
