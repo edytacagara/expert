@@ -11,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import pl.expert.core.engine.Engine;
+import pl.expert.ui.MainFrame;
 import pl.expert.ui.exception.UIException;
 
 /**
@@ -50,6 +52,12 @@ public class InferenceDialog extends Stage implements InferenceInterface {
     @Override
     public void startAll() {
         System.out.println("Start all");
+//        Thread thread = new Thread(() -> {
+            Engine engine = new Engine();
+            engine.doMagic(MainFrame.getKnowledge());
+//        });
+        System.out.println("Do magic starting");
+//        thread.start();
     }
 
     @Override

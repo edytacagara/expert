@@ -12,8 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import pl.expert.core.engine.Engine;
-import pl.expert.ui.MainFrame;
 
 /**
  * FXML Controller class
@@ -24,8 +22,8 @@ public class DialogController implements Initializable {
 
     private InferenceInterface inferenceInterface;
 
-    @FXML
-    private Button inferenceStart;
+    @FXML        
+    public Button inferenceStart;
     @FXML
     private Button nextStep;
     @FXML
@@ -45,8 +43,6 @@ public class DialogController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-
     }
 
     @FXML
@@ -54,12 +50,9 @@ public class DialogController implements Initializable {
         this.inferenceInterface.onClose();
     }
 
+    @FXML
     public void doMagic() {
-        Thread thread = new Thread(() -> {
-            Engine engine = new Engine();
-            engine.doMagic(MainFrame.getKnowledge());
-        });
-        thread.start();
+        this.inferenceInterface.startAll();
     }
 
     /**
