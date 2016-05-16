@@ -18,6 +18,7 @@ public class Rule implements Serializable {
 
     private List<String> conditions;
     private String result;
+    private Boolean resolved;
 
     public Rule() {
         conditions = new ArrayList<>();
@@ -42,6 +43,14 @@ public class Rule implements Serializable {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public Boolean getResolved() {
+        return resolved;
+    }
+
+    public void setResolved(Boolean resolved) {
+        this.resolved = resolved;
     }
 
     @Override

@@ -21,6 +21,7 @@ public class RuleResolver {
     public static void resolve(final Knowledge knowledge) {
         Resolved.clearChanged();
         for (Rule rule : knowledge.getRules()) {
+            boolean ruleResult = true;
             for (String condition : rule.getConditions()) {
                 LOG.log(Level.INFO, "Processing condition: {0}", condition);
                 Boolean conditionResolved = Resolved.get(condition);
@@ -34,9 +35,12 @@ public class RuleResolver {
                     ConstraintResolver.resolveConstraint(knowledge.getConstraints(), condition);
                 } else if (!conditionResolved) {
                     LOG.log(Level.INFO, "Condition: {0} is false", condition);
+                    ruleResult = false;
                     break;
                 }
             }
+            rule.setResolved(ruleResult);
+            Resolved.put(rule.getResult(), ruleResult);
         }
     }
 
