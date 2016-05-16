@@ -6,21 +6,58 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.expert.ui.EditController">
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.expert.ui.EditController">
     <children>
-        <HBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="380.0" prefWidth="515.0" fitToHeight="true" >
-                    <content>
-                        <ListView fx:id="list" prefHeight="380.0" prefWidth="513.0" />
-                    </content>
-                </ScrollPane>
-                <VBox prefHeight="200.0" prefWidth="100.0">
+        <SplitPane dividerPositions="0.5" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <items>
+                <AnchorPane id="AnchorPane2" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="true">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#addButtonAction" text="Dodaj" />
+                        <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                            <content>
+                                <ListView fx:id="listView" />
+                            </content>
+                        </ScrollPane>
                     </children>
-                </VBox>
-            </children>
-        </HBox>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                    <children>
+                        <Pane fx:id="testPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.topAnchor="0">
+                            <children>
+                                <Label text="TEST" />
+                            </children>
+                        </Pane>
+                        <Pane SplitPane.resizableWithParent="true"  AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                            <children>
+                                <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" SplitPane.resizableWithParent="true">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" />
+                                        <ColumnConstraints fillWidth="true" hgrow="ALWAYS" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints vgrow="ALWAYS" />
+                                        <RowConstraints vgrow="ALWAYS" />
+                                        <RowConstraints vgrow="ALWAYS" />
+                                        <RowConstraints vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Warunki" />
+                                        <Label text="Wniosek" GridPane.rowIndex="1" />
+                                        <TextField fx:id="conditionsInput" promptText="Warunki" GridPane.columnIndex="1" />
+                                        <TextField fx:id="resultInput" promptText="Wniosek" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" spacing="10" >
+                                            <children>
+                                                <Button fx:id="addEditButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#saveAction" text="Dodaj" />
+                                                <Button mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#cancelAction" text="Anuluj" />
+                                                <Button fx:id="removeButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#removeAction" text="Usuń" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </Pane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
     </children>
 </AnchorPane>

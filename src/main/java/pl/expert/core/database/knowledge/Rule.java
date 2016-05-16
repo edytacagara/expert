@@ -32,6 +32,10 @@ public class Rule implements Serializable {
     public List<String> getConditions() {
         return conditions;
     }
+    
+    public String getConditionsToInput() {
+        return Joiner.on(", ").join(conditions);
+    }
 
     public void setConditions(List<String> conditions) {
         this.conditions = conditions;
@@ -56,5 +60,10 @@ public class Rule implements Serializable {
     @Override
     public String toString() {
         return Joiner.on(" i ").join(conditions) + " -> " + result;
+    }
+    
+    public void updateRule(Rule newRule) {
+        this.conditions = newRule.getConditions();
+        this.result = newRule.getResult();
     }
 }
