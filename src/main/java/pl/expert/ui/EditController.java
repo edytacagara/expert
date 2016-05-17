@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import pl.expert.core.database.knowledge.Knowledge;
 import pl.expert.core.database.knowledge.Rule;
@@ -31,6 +33,9 @@ public class EditController implements Initializable {
 
     @FXML
     private Pane testPane;
+    
+    @FXML
+    private GridPane gridPane;
 
     @FXML
     private TextField conditionsInput;
@@ -58,6 +63,11 @@ public class EditController implements Initializable {
         knowledge.getRules().forEach(rule -> items.add(rule));
         listView.setItems(items);
         listView.setOnMouseClicked(event -> listElementSelected(event));
+        
+        ObservableList<ColumnConstraints> columnConstrains = gridPane.getColumnConstraints();
+        columnConstrains.get(0).setPercentWidth(25.0);
+        columnConstrains.get(1).setPercentWidth(75.0);
+        conditionsInput.setPrefWidth(370);
     }
 
     public void initData() {
