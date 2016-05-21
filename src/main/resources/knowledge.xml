@@ -38,102 +38,239 @@
 			<conditions>kobieta w ciazy,erytrocyty ponizej normy,brak utraty duzej ilosci krwi,zla dieta</conditions>
 			<result>ANEMIA W CIAZY</result>
 		</rule>
-                <rule>
-                        <conditions>naduzywanie alkoholu,palenie papierosow</conditions>
-                        <result>uzywki</result>
-                </rule>
-               <rule>
-                        <conditions>niewystarczajaca aktywnosc fizyczna lub jej brak,dieta bogata w tluszcze</conditions>
-                        <result>niezdrowy tryb zycia</result>
-                </rule>
-                <rule>
-                        <conditions>choroba przewlekla,niezdrowy tryb zycia,uzywki</conditions>
-                        <result>ANEMIA CHOROB PRZEWLEKLYCH</result>
-                </rule>
-                <rule>
-                        <conditions>utrata duzej ilosci krwi,obnizone cisnienie</conditions>
-                        <result>ANEMIA POKRWOTOCZNA</result>
-                </rule>
-                <rule>
-                        <conditions>ANEMIA POKRWOTOCZNA,ogolne objawy anemii</conditions>
-                        <result>ANEMIA Z NIEDOBORU ZELAZA</result>
-                </rule> 
-                <rule>
-                        <conditions>niedobor zelaza,niedobor ferrytyny</conditions>
-                        <result>ANEMIA Z NIEDOBORU ZELAZA</result>
-                </rule>
-                <rule>
-                        <conditions>spadek poziomu ferrytyny w czasie (jednak nadal w granicach normy),spadek poziomu zelaza w czasie (jednak nadal w granicach normy)</conditions>
-                        <result>tendencja do anemii</result>
-                </rule> 
-                <rule>
-                        <conditions>tendencja do anemii,brak poprawy stanu zdrowia w czasie</conditions>
-                        <result>ANEMIA Z NIEDOBORU ZELAZA</result>
-                </rule>
-                <rule>
-                        <conditions>uzywki,wegetarianizm</conditions>
-                        <result>niedobor witaminy B12</result>
-                </rule> 
-                <rule>
-                        <conditions>choroba Addisona i Biermera,zaburzenia wchlaniania wit.B12 w przewodzie pokarmowym</conditions>
-                        <result>niedobor witaminy B12</result>
-                </rule>
-                <rule>
-                        <conditions>niedobor witaminy B12,zmniejszenie masy ciala o 5-15kg</conditions>
-                        <result>ANEMIA Z NIEDOBORU WITAMINY B12</result>
-                </rule> 
-                <rule>
-                        <conditions>utrata smaku,pieczenie jezyka,nudnosci,biegunka/zaparcia</conditions>
-                        <result>ANEMIA Z NIEDOBORU WITAMINY B12</result>
-                </rule>
-                <rule>
-                        <conditions>ogolne objawy anemii,nabyte bielactwo</conditions>
-                        <result>ANEMIA Z NIEDOBORU WITAMINY B12</result>
-                </rule> 
-                <rule>
-                        <conditions>ogolne objawy anemii,bol brzucha,przyspieszone tetno</conditions>
-                        <result>ANEMIA HEMOLITYCZNA</result>
-                </rule>
-                <rule>
-                        <conditions>goraczka,nudnosci,erytrocyty ponizej normy</conditions>
-                        <result>ANEMIA HEMOLITYCZNA</result>
-                </rule> 
-                <rule>
-                        <conditions>dieta malo zroznicowana,kobieta w ciazy,brak sumplementacji kwasu foliowego</conditions>
-                        <result>niedobor kwasu foliowego</result>
-                </rule>
-                <rule>
-                        <conditions>naduzywanie alkoholu,ANEMIA HEMOLITYCZNA</conditions>
-                        <result>niedobor kwasu foliowego</result>
-                </rule> 
-                <rule>
-                        <conditions>niedobor cynku,zaburzenia trawienia i wchlaniania</conditions>
-                        <result>niedobor kwasu foliowego</result>
-                </rule>
-                <rule>
-                        <conditions>niedobor kwasu foliowego,zmniejszenie masy ciala o 5-15kg,utrata smaku</conditions>
-                        <result>ANEMIA Z NIEDOBORU KWASU FOLIOWEGO</result>
-                </rule> 
-                <rule>
-                        <conditions>zawroty glowy,szum w uszach,zaburzenia widzenia</conditions>
-                        <result>objawy czerwienicy</result>
-                </rule>
-                <rule>
-                        <conditions>duzy wzrost liczby leukocytow w czasie,duzy wzrost liczby plytek krwi w czasie</conditions>
-                        <result>objawy czerwienicy</result>
-                </rule> 
-                <rule>
-                        <conditions>erytrocyty powyzej normy,objawy czerwienicy</conditions>
-                        <result>CZERWIENICA PRAWDZIWA(NADKRWISTOSC)</result>
-                </rule>
-                <rule>
-                        <conditions>nienaturalne zaczerwienienie skory twarzy/rak/stop/uszu,swiad skory po kontakcie z goraca woda</conditions>
-                        <result>CZERWIENICA PRAWDZIWA(NADKRWISTOSC)</result>
-                </rule>
-                <rule>
-                        <conditions>krwawienie z nosa,nadcisnienie tetnicze</conditions>
-                        <result>CZERWIENICA PRAWDZIWA(NADKRWISTOSC)</result>
-                </rule>
+		<rule>
+			<conditions>naduzywanie alkoholu,palenie papierosow</conditions>
+			<result>uzywki</result>
+		</rule>
+	   <rule>
+			<conditions>niewystarczajaca aktywnosc fizyczna lub jej brak,dieta bogata w tluszcze</conditions>
+			<result>niezdrowy tryb zycia</result>
+		</rule>
+		<rule>
+			<conditions>choroba przewlekla,niezdrowy tryb zycia,uzywki</conditions>
+			<result>ANEMIA CHOROB PRZEWLEKLYCH</result>
+		</rule>
+		<rule>
+			<conditions>utrata duzej ilosci krwi,obnizone cisnienie</conditions>
+			<result>ANEMIA POKRWOTOCZNA</result>
+		</rule>
+		<rule>
+			<conditions>ANEMIA POKRWOTOCZNA,ogolne objawy anemii</conditions>
+			<result>ANEMIA Z NIEDOBORU ZELAZA</result>
+		</rule> 
+		<rule>
+			<conditions>niedobor zelaza,niedobor ferrytyny</conditions>
+			<result>ANEMIA Z NIEDOBORU ZELAZA</result>
+		</rule>
+		<rule>
+			<conditions>spadek poziomu ferrytyny w czasie (jednak nadal w granicach normy),spadek poziomu zelaza w czasie (jednak nadal w granicach normy)</conditions>
+			<result>tendencja do anemii</result>
+		</rule> 
+		<rule>
+			<conditions>tendencja do anemii,brak poprawy stanu zdrowia w czasie</conditions>
+			<result>ANEMIA Z NIEDOBORU ZELAZA</result>
+		</rule>
+		<rule>
+			<conditions>uzywki,wegetarianizm</conditions>
+			<result>niedobor witaminy B12</result>
+		</rule> 
+		<rule>
+			<conditions>choroba Addisona i Biermera,zaburzenia wchlaniania wit.B12 w przewodzie pokarmowym</conditions>
+			<result>niedobor witaminy B12</result>
+		</rule>
+		<rule>
+			<conditions>niedobor witaminy B12,zmniejszenie masy ciala o 5-15kg</conditions>
+			<result>ANEMIA Z NIEDOBORU WITAMINY B12</result>
+		</rule> 
+		<rule>
+			<conditions>utrata smaku,pieczenie jezyka,nudnosci,biegunka/zaparcia</conditions>
+			<result>ANEMIA Z NIEDOBORU WITAMINY B12</result>
+		</rule>
+		<rule>
+			<conditions>ogolne objawy anemii,nabyte bielactwo</conditions>
+			<result>ANEMIA Z NIEDOBORU WITAMINY B12</result>
+		</rule> 
+		<rule>
+			<conditions>ogolne objawy anemii,bol brzucha,przyspieszone tetno</conditions>
+			<result>ANEMIA HEMOLITYCZNA</result>
+		</rule>
+		<rule>
+			<conditions>goraczka,nudnosci,erytrocyty ponizej normy</conditions>
+			<result>ANEMIA HEMOLITYCZNA</result>
+		</rule> 
+		<rule>
+			<conditions>dieta malo zroznicowana,kobieta w ciazy,brak sumplementacji kwasu foliowego</conditions>
+			<result>niedobor kwasu foliowego</result>
+		</rule>
+		<rule>
+			<conditions>naduzywanie alkoholu,ANEMIA HEMOLITYCZNA</conditions>
+			<result>niedobor kwasu foliowego</result>
+		</rule> 
+		<rule>
+			<conditions>niedobor cynku,zaburzenia trawienia i wchlaniania</conditions>
+			<result>niedobor kwasu foliowego</result>
+		</rule>
+		<rule>
+			<conditions>niedobor kwasu foliowego,zmniejszenie masy ciala o 5-15kg,utrata smaku</conditions>
+			<result>ANEMIA Z NIEDOBORU KWASU FOLIOWEGO</result>
+		</rule> 
+		<rule>
+			<conditions>zawroty glowy,szum w uszach,zaburzenia widzenia</conditions>
+			<result>objawy czerwienicy</result>
+		</rule>
+		<rule>
+			<conditions>duzy wzrost liczby leukocytow w czasie,duzy wzrost liczby plytek krwi w czasie</conditions>
+			<result>objawy czerwienicy</result>
+		</rule> 
+		<rule>
+			<conditions>erytrocyty powyzej normy,objawy czerwienicy</conditions>
+			<result>CZERWIENICA PRAWDZIWA(NADKRWISTOSC)</result>
+		</rule>
+		<rule>
+			<conditions>nienaturalne zaczerwienienie skory twarzy/rak/stop/uszu,swiad skory po kontakcie z goraca woda</conditions>
+			<result>CZERWIENICA PRAWDZIWA(NADKRWISTOSC)</result>
+		</rule>
+		<rule>
+			<conditions>krwawienie z nosa,nadcisnienie tetnicze</conditions>
+			<result>CZERWIENICA PRAWDZIWA(NADKRWISTOSC)</result>
+		</rule>
+		<!--choroby układu nerwowego-->
+		<rule>
+			<conditions>stres,lek,przynebienie</conditions>
+			<result>MIGRENA</result>
+		</rule>
+		<rule>
+			<conditions>uzywki,zla dieta</conditions>
+			<result>MIGRENA</result>
+		</rule>
+		<rule>
+			<conditions>zmiany pogody,bol glowy</conditions>
+			<result>MIGRENA</result>
+		</rule>
+		<rule>
+			<conditions>udar,czas trwania ponizej doby</conditions>
+			<result>przemijajacy napad niedokrwienia mozgu</result>
+		</rule>
+		<rule>
+			<conditions>udar,czas trwania od doby do 21 dni</conditions>
+			<result>odwracalny udar niedokrwienny</result>
+		</rule>
+		<rule>
+			<conditions>udar,czas trwania powyzej 21 dni</conditions>
+			<result>udar dokonany</result>
+		</rule>
+		<rule>
+			<conditions>zamkniecie tetnicy,ograniczony doplyw krwi do mozgu</conditions>
+			<result>udar</result>
+		</rule>
+		<rule>
+			<conditions>zaburzenia czynnosci mozgu,objawy neurologiczne</conditions>
+			<result>udar</result>
+		</rule>
+		<rule>
+			<conditions>badania pomocnicze(TK,MR,USG) wskazujace udar</conditions>
+			<result>objawy neurologiczne</result>
+		</rule>
+		<rule>
+			<conditions>niesprowokowany napad,zaburzenia swiadomosci</conditions>
+			<result>padaczka</result>
+		</rule>
+		<rule>
+			<conditions>badania pomocnicze(TK,MR,USG),zatarcie granicy miedzy istota szara i biala</conditions>
+			<result>badania pomocnicze(TK,MR,USG) wskazujace udar</result>
+		</rule>
+		<rule>
+			<conditions>badania pomocnicze(TK,MR,USG),krwawienie wewnatrzczaskowe</conditions>
+			<result>badania pomocnicze(TK,MR,USG) wskazujace udar</result>
+		</rule>
+		<rule>
+			<conditions>nadcisnienie tetnicze,uzywki</conditions>
+			<result>udar</result>
+		</rule>
+		<rule>
+			<conditions>uraz mozgu(stlucznie,wstrzasniecie)</conditions>
+			<result>padaczka</result>
+		</rule>
+		<rule>
+			<conditions>przebyty udar,niedokrwawienie</conditions>
+			<result>padaczka</result>
+		</rule>
+		<rule>
+			<conditions>leki(antybiotyki,przeciwarytmiczne,chemioterapeutyki,rozluzniajace miesnie)</conditions>
+			<result>padaczka</result>
+		</rule>
+		<rule>
+			<conditions>zapalenie opon mozgowych,niedokrwawienie</conditions>
+			<result>padaczka</result>
+		</rule>
+		<rule>
+			<conditions>badania pomocnicze EEG wskazujace padaczke</conditions>
+			<result>padaczka</result>
+		</rule>
+		<rule>
+			<conditions>oslabiona zdolnosc przyswajania nowych informacji</conditions>
+			<result>otepienie</result>
+		</rule>
+		<rule>
+			<conditions>apatia,utrata zainteresowan</conditions>
+			<result>otepienie</result>
+		</rule>
+		<rule>
+			<conditions>pogorszenie codziennego funkcjonowania,utrata kontroli emocjonalnej</conditions>
+			<result>otepienie</result>
+		</rule>
+		<rule>
+			<conditions>stawanie sie placzliwym,stawanie sie drazliwym</conditions>
+			<result>utrata kontroli emocjonalnej</result>
+		</rule>
+		<rule>
+			<conditions>utrata kontroli emocjonalnej,wiek powyzej 40 lat</conditions>
+			<result>otepienie</result>
+		</rule>
+		<rule>
+			<conditions>otepienie,wiek powyzej 40 lat</conditions>
+			<result>choroba Alzheimera</result>
+		</rule>
+		<rule>
+			<conditions>samotne zycie,brak znajomych,otepienie</conditions>
+			<result>choroba Alzheimera</result>
+		</rule>
+		<rule>
+			<conditions>zbyt szybkie zaprzestanie nauki,otepienie</conditions>
+			<result>choroba Alzheimera</result>
+		</rule>
+		<rule>
+			<conditions>otepienie,obiawy Parkinsona,omamy wzrokowe</conditions>
+			<result>otepienie z cialami Lewy'ego</result>
+		</rule>
+		<rule>
+			<conditions>wiek powyzej 40 lat,otepienie,zespol Kluvera i Bucky'ego</conditions>
+			<result>zwyrodnienie czolowo-skroniowe</result>
+		</rule>
+		<rule>
+			<conditions>obustronne uszkodzenie platow skroniowych,zaburzenia czynnosci mozgu</conditions>
+			<result>zespol Kluvera i Bucky'ego</result>
+		</rule>
+		<rule>
+			<conditions>obustronne uszkodzenie platow skroniowych,drzenie spoczynkowe,sztywnosc miesni</conditions>
+			<result>choroba Parkinsona</result>
+		</rule>
+		<rule>
+			<conditions>spowolnienie ruchowe,przebyty udar,drzenie spoczynkowe</conditions>
+			<result>choroba Parkinsona</result>
+		</rule>
+		<rule>
+			<conditions>szybkie postepowanie zespolu parkinsona,zaburzenia ruchow galki ocznej</conditions>
+			<result>postepujace porazenie nadjadrowe</result>
+		</rule>
+		<rule>
+			<conditions>choroba Parkinsona,postepujacy przebieg</conditions>
+			<result>szybkie postepowanie zespolu parkinsona</result>
+		</rule>
+		<rule>
+			<conditions>drzenie rak,drzenie glowy</conditions>
+			<result>drzenie samoistne</result>
+		</rule>
 	</rules>
 
 	<models>
@@ -161,19 +298,49 @@
 			<value>11.00</value>
 			<result>hemoglobina ponizej normy</result>
 		</model>
-                <model>
+		<model>
 			<argument>Poziom hematokrytu(%)[norma od 35.0 do 50.0]:</argument>
 			<operator>lt</operator>
 			<value>35.00</value>
 			<result>hematokryt ponizej normy</result>
 		</model>
-                
+        <model>
+			<argument>Wiek</argument>
+			<operator>ge</operator>
+			<value>40</value>
+			<result>wiek powyzej 40 lat</result>
+		</model>
+         <model>
+			<argument>Wiek</argument>
+			<operator>lt</operator>
+			<value>40</value>
+			<result>wiek ponizej 40 lat</result>
+		</model>        
+		 <model>
+			<argument>Czas trwania(doby)</argument>
+			<operator>lt</operator>
+			<value>1</value>
+			<result>czas trwania ponizej doby</result>
+		</model>        
+		 <model>
+			<argument>Czas trwania(doby)</argument>
+			<operator>gt,lt</operator>
+			<value>1,21</value>
+			<result>czas trwania od doby do 21 dni</result>
+		</model>   
+		 <model>
+			<argument>Czas trwania(doby)</argument>
+			<operator>ge</operator>
+			<value>21</value>
+			<result>czas trwania powyzej 21 dni</result>
+		</model>   
 	</models>
 	
 	<constraints>
 		<constraint>utrata duzej ilosci krwi,brak utraty duzej ilosci krwi</constraint>
-        	<constraint>niedobor zelaza,spadek poziomu zelaza w czasie (jednak nadal w granicach normy)</constraint>
-                <constraint>niedobor ferrytyny,spadek poziomu ferrytyny w czasie (jednak nadal w granicach normy)</constraint>
+		<constraint>kobieta,mezczyzna</constraint>
+		<constraint>niedobor zelaza,spadek poziomu zelaza w czasie (jednak nadal w granicach normy)</constraint>
+		<constraint>niedobor ferrytyny,spadek poziomu ferrytyny w czasie (jednak nadal w granicach normy)</constraint>
         </constraints>
 	
 </knowledge>
