@@ -7,6 +7,7 @@ package pl.expert.utils.input.impl;
 
 import pl.expert.utils.input.Input;
 import com.sun.javafx.beans.IDProperty;
+import java.math.BigDecimal;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -17,10 +18,11 @@ import pl.expert.utils.MessageDialogs;
  * @author rafal16x
  */
 @IDProperty("number")
-public class NumberInput extends TextField implements Input<Double>{
+public class NumberInput extends TextField implements Input<BigDecimal>{
 
     private static final String EMPTY = "";
-    private static final String COMMA = ".,";
+    private static final char COMMA = ',';
+    private static final char DOT = '.';
 
     public NumberInput() {
         this.addEventFilter(KeyEvent.KEY_TYPED, this.getKeyEvent());
@@ -33,27 +35,18 @@ public class NumberInput extends TextField implements Input<Double>{
     private EventHandler<KeyEvent> getKeyEvent() {
         return (KeyEvent t) -> {
             char ar[] = t.getCharacter().toCharArray();
-            int dividerNumber = this.charCount(COMMA, ar);
             char ch = ar[t.getCharacter().toCharArray().length - 1];
-            if (!(ch >= '0' && ch <= '9') || ((ch == '.' || ch == ',') && dividerNumber > 1)) {
-                MessageDialogs.showSimpleErrorAlert("Wprowadzono niepoprawny znak");
+            boolean isSeparator = ch == COMMA || ch == DOT;
+            boolean justHaveSep = t.toString().contains(String.valueOf(COMMA)) || t.toString().contains(String.valueOf(DOT));
+            if (!(ch >= '0' && ch <= '9') ||  (isSeparator && justHaveSep)) {
+                MessageDialogs.showSimpleErrorAlert("Wprowadzono niedozwolony znak");
                 t.consume();
             }
         };
     }
 
-    private int charCount(String expr, char[] chars) {
-        int count = 0;
-        for (char h : chars) {
-            if (expr.contains(String.valueOf(h))) {
-                count++;
-            }
-        }
-        return count;
-    }
-
     @Override
-    public Double getValue() {
-        return  Double.valueOf(this.getText().replace(",", "."));
+    public BigDecimal getValue() {
+        return  new BigDecimal(this.getText().replace(",", "."));
     }
 }

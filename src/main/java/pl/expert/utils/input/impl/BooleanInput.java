@@ -7,22 +7,27 @@ package pl.expert.utils.input.impl;
 
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import pl.expert.utils.input.Input;
 
 /**
  *
  * @author rafal16x
  */
-public class BooleanInput extends ToggleGroup implements Input<Boolean> {
+public class BooleanInput extends HBox implements Input<Boolean> {
 
-    private RadioButton yes;
-    private RadioButton no;
+    private final ToggleGroup group;
+    private final RadioButton yes;
+    private final RadioButton no;
 
     public BooleanInput() {
+        group = new ToggleGroup();
         this.yes = new RadioButton("Tak");
         this.no = new RadioButton("No");
         this.yes.setSelected(true);
         this.setGroup(yes,no);
+        this.getChildren().add(this.yes);
+        this.getChildren().add(this.no);
     }
 
     @Override
@@ -32,7 +37,7 @@ public class BooleanInput extends ToggleGroup implements Input<Boolean> {
 
     private void setGroup(RadioButton... radioButtons) {
         for (RadioButton rb : radioButtons) {
-            rb.setToggleGroup(this);
+            rb.setToggleGroup(this.group);
         }
     }
 }
