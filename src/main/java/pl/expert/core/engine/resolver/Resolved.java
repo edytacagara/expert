@@ -45,7 +45,8 @@ public class Resolved {
 
     public static void checkDuplicates(Map<String, List<Boolean>> Mapa, final String condition, final boolean value) {
         List<Boolean> listBooleanResults = resolveDuplicates.get(condition);
-        if (!listBooleanResults.isEmpty()) {
+        if (listBooleanResults == null) {
+        } else if (!listBooleanResults.isEmpty()) {
             listBooleanResults.add(value);
             resolveDuplicates.put(condition, listBooleanResults);
         } else {
