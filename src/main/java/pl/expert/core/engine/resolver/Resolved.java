@@ -5,7 +5,9 @@
  */
 package pl.expert.core.engine.resolver;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,6 +16,7 @@ import java.util.Map;
  */
 public class Resolved {
 
+    private static final Map<String, List<Boolean>> resolveDuplicates = new HashMap<>();
     private static final Map<String, Boolean> resolve = new LinkedHashMap<>();
     private static boolean changed = false;
 
@@ -34,4 +37,27 @@ public class Resolved {
         changed = false;
     }
 
+    public static void putWithDuplicates(final String condition, final boolean value) {
+
+        checkDuplicates(resolveDuplicates, condition, value);
+
+    }
+
+    public static void checkDuplicates(Map<String, List<Boolean>> Mapa, final String condition, final boolean value) {
+        List<Boolean> listBooleanResults = resolveDuplicates.get(condition);
+        if (!listBooleanResults.isEmpty()) {
+            listBooleanResults.add(value);
+            resolveDuplicates.put(condition, listBooleanResults);
+        } else {
+            putNonDuplicates(condition, value);
+        }
+    }
+
+    public static void putNonDuplicates(final String condition, final boolean value) {
+
+        List<Boolean> list = null;
+        list.add(value);
+        resolveDuplicates.put(condition, list);
+
+    }
 }
