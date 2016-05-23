@@ -36,9 +36,11 @@
           text="Baza wiedzy" />
         <MenuItem 
           mnemonicParsing="false"
+          onAction="#editModelAction"
           text="Model" />
         <MenuItem 
           mnemonicParsing="false"
+          onAction="#editConstraintsAction"
           text="Ograniczenia" />
       </items>
     </Menu>

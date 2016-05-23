@@ -21,8 +21,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import pl.expert.Context;
 import pl.expert.core.database.knowledge.Knowledge;
 import pl.expert.core.database.knowledge.Rule;
+import pl.expert.ui.dictionary.EditView;
 import pl.expert.utils.MessageDialogs;
 
 public class EditController implements Initializable {
@@ -58,6 +60,8 @@ public class EditController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        EditView view = Context.getInstance().getCurrentEditView();
+        
         testPane.setVisible(false);
         knowledge = MainFrame.getKnowledge();
         knowledge.getRules().forEach(rule -> items.add(rule));

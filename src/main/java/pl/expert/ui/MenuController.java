@@ -16,9 +16,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import pl.expert.Context;
 import pl.expert.core.database.knowledge.Knowledge;
 import pl.expert.core.database.reader.KnowledgeReader;
 import pl.expert.core.exception.KnowledgeReaderException;
+import pl.expert.ui.dictionary.EditView;
 import pl.expert.ui.exception.UIException;
 import pl.expert.ui.inference.InferenceDialog;
 import pl.expert.utils.MessageDialogs;
@@ -43,23 +45,17 @@ public class MenuController {
 
     @FXML
     public void editRulesAction(ActionEvent actionEvent) {
-        //uncomment to autoload knowledge base
-//        loadFileForTestPurposes();
-        
-        if (!checkIfKnowledgeBaseLoaded()) {
-            return;
-        }
+        editKnowledge(EditView.RULE);
+    }
 
-        try {
-            URL editUrl = getClass().getResource("/fxml/Edit.fxml");
+    @FXML
+    public void editModelAction(ActionEvent actionEvent) {
+        editKnowledge(EditView.MODEL);
+    }
 
-            AnchorPane editView = FXMLLoader.load(editUrl);
-            BorderPane border = MainFrame.getRoot();
-
-            border.setCenter(editView);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void editConstraintsAction(ActionEvent actionEvent) {
+        editKnowledge(EditView.CONSTRAINT);
     }
 
     @FXML
@@ -101,10 +97,31 @@ public class MenuController {
         }
         return true;
     }
-    
+
     private void loadFileForTestPurposes() {
         String kzagrabaKnowledgeBaseFilePath = "/home/kzagraba/workspace/expert/src/main/resources/knowledge.xml";
         File file = new File(kzagrabaKnowledgeBaseFilePath);
         loadFile(file);
+    }
+
+    private void editKnowledge(EditView editView) {
+        //uncomment to autoload knowledge base
+//        loadFileForTestPurposes();
+
+        if (!checkIfKnowledgeBaseLoaded()) {
+            return;
+        }
+
+        try {
+            URL editUrl = getClass().getResource("/fxml/Edit.fxml");
+            Context.getInstance().setCurrentEditView(editView);
+
+            AnchorPane editViewPane = FXMLLoader.load(editUrl);
+            BorderPane border = MainFrame.getRoot();
+
+            border.setCenter(editViewPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
