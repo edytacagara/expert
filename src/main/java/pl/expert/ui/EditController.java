@@ -22,7 +22,10 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import pl.expert.Context;
+import pl.expert.core.database.knowledge.Constraint;
 import pl.expert.core.database.knowledge.Knowledge;
+import pl.expert.core.database.knowledge.KnowledgeElement;
+import pl.expert.core.database.knowledge.Model;
 import pl.expert.core.database.knowledge.Rule;
 import pl.expert.ui.dictionary.EditView;
 import pl.expert.utils.MessageDialogs;
@@ -35,15 +38,21 @@ public class EditController implements Initializable {
 
     @FXML
     private Pane testPane;
-    
+
     @FXML
-    private GridPane gridPane;
+    private GridPane rulePane;
+
+    @FXML
+    private GridPane modelPane;
+
+    @FXML
+    private GridPane constraintPane;
 
     @FXML
     private TextField conditionsInput;
 
     @FXML
-    private TextField resultInput;
+    private TextField ruleResultInput;
 
     @FXML
     private Button addEditButton;
@@ -52,26 +61,23 @@ public class EditController implements Initializable {
     private Button removeButton;
 
     @FXML
-    private ListView<Rule> listView;
-    ObservableList<Rule> items = FXCollections.observableArrayList();
+    private ListView<KnowledgeElement> listView;
+    ObservableList<KnowledgeElement> items = FXCollections.observableArrayList();
+    ObservableList<Rule> ruleItems = FXCollections.observableArrayList();
+    ObservableList<Model> modelItems = FXCollections.observableArrayList();
+    ObservableList<Constraint> constraintItems = FXCollections.observableArrayList();
+
+    private EditView editView;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        EditView view = Context.getInstance().getCurrentEditView();
-        
-        testPane.setVisible(false);
-        knowledge = MainFrame.getKnowledge();
-        knowledge.getRules().forEach(rule -> items.add(rule));
-        listView.setItems(items);
-        listView.setOnMouseClicked(event -> listElementSelected(event));
-        
-        ObservableList<ColumnConstraints> columnConstrains = gridPane.getColumnConstraints();
-        columnConstrains.get(0).setPercentWidth(25.0);
-        columnConstrains.get(1).setPercentWidth(75.0);
-        conditionsInput.setPrefWidth(370);
+        editView = Context.getInstance().getCurrentEditView();
+
+        hideProperPane(editView);
+        initializeList(editView);
     }
 
     public void initData() {
@@ -83,34 +89,37 @@ public class EditController implements Initializable {
     }
 
     public void listElementSelected(MouseEvent event) {
-        addEditButton.setText("Zapisz");
-        removeButton.setVisible(true);
-        selectedRule = listView.getSelectionModel().getSelectedItem();
-        selectedRuleIndex = items.indexOf(selectedRule);
-        conditionsInput.setText(selectedRule.getConditionsToInput());
-        resultInput.setText(selectedRule.getResult());
+        //TODO ogarnąć ifa, dałem, żeby nie leciały wyjątki przy klikaniu na różne listy
+        if (editView.equals(EditView.RULE)) {
+            addEditButton.setText("Zapisz");
+            removeButton.setVisible(true);
+            selectedRule = (Rule) listView.getSelectionModel().getSelectedItem();
+            selectedRuleIndex = ruleItems.indexOf(selectedRule);
+            conditionsInput.setText(selectedRule.getConditionsToInput());
+            ruleResultInput.setText(selectedRule.getResult());
+        }
     }
 
     @FXML
     public void saveAction(MouseEvent event) {
-        
+
         if (!checkIfIsRuleValid()) {
             MessageDialogs.showSimpleErrorAlert("Zapisywana reguła jest niepoprawna");
             return;
         }
-        
+
         List<String> conditions = Arrays.asList(conditionsInput.getText().replace(" ", "").split(","));
-        String result = resultInput.getText();
+        String result = ruleResultInput.getText();
 
         if (selectedRule == null) {
             Rule newRule = new Rule(conditions, result);
-            items.add(newRule);
+            ruleItems.add(newRule);
         } else {
             selectedRule.setConditions(conditions);
             selectedRule.setResult(result);
-            listView.getSelectionModel().getSelectedItem().updateRule(selectedRule);
-            items.remove(selectedRuleIndex);
-            items.add(selectedRuleIndex, selectedRule);
+            ((Rule) listView.getSelectionModel().getSelectedItem()).updateRule(selectedRule);
+            ruleItems.remove(selectedRuleIndex);
+            ruleItems.add(selectedRuleIndex, selectedRule);
             listView.getSelectionModel().clearSelection();
         }
         clearInputs();
@@ -126,10 +135,10 @@ public class EditController implements Initializable {
         addEditButton.setText("Dodaj");
         removeButton.setVisible(false);
     }
-    
+
     @FXML
     public void removeAction(MouseEvent event) {
-        items.remove(selectedRuleIndex);
+        ruleItems.remove(selectedRuleIndex);
         listView.getSelectionModel().clearSelection();
         selectedRule = null;
         clearInputs();
@@ -139,18 +148,69 @@ public class EditController implements Initializable {
 
     private void clearInputs() {
         conditionsInput.clear();
-        resultInput.clear();
+        ruleResultInput.clear();
     }
-    
+
     private boolean checkIfIsRuleValid() {
         if (Strings.isNullOrEmpty(conditionsInput.getText())) {
             return false;
         }
-        
-        if (Strings.isNullOrEmpty(resultInput.getText())) {
+
+        if (Strings.isNullOrEmpty(ruleResultInput.getText())) {
             return false;
         }
-        
+
         return true;
+    }
+
+    private void hideProperPane(EditView editView) {
+        switch (editView) {
+            case RULE:
+                rulePane.setVisible(true);
+                modelPane.setVisible(false);
+                constraintPane.setVisible(false);
+                break;
+            case MODEL:
+                rulePane.setVisible(false);
+                modelPane.setVisible(true);
+                constraintPane.setVisible(false);
+                break;
+            case CONSTRAINT:
+                rulePane.setVisible(false);
+                modelPane.setVisible(false);
+                constraintPane.setVisible(true);
+                break;
+            default:
+        }
+
+    }
+
+    private void initializeList(EditView editView) {
+        testPane.setVisible(false);
+        knowledge = MainFrame.getKnowledge();
+
+        switch (editView) {
+            case RULE:
+                knowledge.getRules().forEach(rule -> items.add(rule));
+                listView.setItems(items);
+                listView.setOnMouseClicked(event -> listElementSelected(event));
+                break;
+            case MODEL:
+                knowledge.getModels().forEach(model -> items.add(model));
+                listView.setItems(items);
+                listView.setOnMouseClicked(event -> listElementSelected(event));
+                break;
+            case CONSTRAINT:
+                knowledge.getConstraints().forEach(constraint -> items.add(constraint));
+                listView.setItems(items);
+                listView.setOnMouseClicked(event -> listElementSelected(event));
+                break;
+            default:
+        }
+        
+        ObservableList<ColumnConstraints> columnConstrains = rulePane.getColumnConstraints();
+        columnConstrains.get(0).setPercentWidth(25.0);
+        columnConstrains.get(1).setPercentWidth(75.0);
+        conditionsInput.setPrefWidth(370);
     }
 }

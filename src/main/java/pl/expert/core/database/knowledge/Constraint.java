@@ -5,6 +5,7 @@
  */
 package pl.expert.core.database.knowledge;
 
+import com.google.common.base.Joiner;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Mariusz Batyra
  */
-public class Constraint {
+public class Constraint implements KnowledgeElement {
 
     private List<String> constraint;
 
@@ -32,4 +33,8 @@ public class Constraint {
         this.constraint = constraint;
     }
 
+    @Override
+    public String toString() {
+        return Joiner.on(", ").join(constraint);
+    }
 }

@@ -28,7 +28,7 @@
                         </Pane>
                         <Pane prefHeight="402.0" prefWidth="248.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="true">
                             <children>
-                                <GridPane fx:id="gridPane" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" 
+                                <GridPane fx:id="rulePane" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" 
                                           GridPane.hgrow="ALWAYS" SplitPane.resizableWithParent="true" maxWidth="1000" >
                                     <columnConstraints>
                                         <ColumnConstraints percentWidth="25.0" />
@@ -44,12 +44,74 @@
                                         <Label text="Warunki" />
                                         <Label text="Wniosek" GridPane.rowIndex="1" />
                                         <TextField fx:id="conditionsInput" alignment="TOP_LEFT" promptText="Warunki" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
-                                        <TextField fx:id="resultInput" promptText="Wniosek" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                                        <TextField fx:id="ruleResultInput" promptText="Wniosek" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
                                         <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                             <children>
                                                 <Button fx:id="addEditButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#saveAction" text="Dodaj" />
                                                 <Button mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#cancelAction" text="Anuluj" />
                                                 <Button fx:id="removeButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#removeAction" text="Usuń" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="402.0" prefWidth="248.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="true">
+                            <children>
+                                <GridPane fx:id="modelPane" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" 
+                                          GridPane.hgrow="ALWAYS" SplitPane.resizableWithParent="true" maxWidth="1000" >
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="25.0" />
+                                        <ColumnConstraints percentWidth="75.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Argument" />
+                                        <Label text="Operatory(y)" GridPane.rowIndex="1"/>
+                                        <Label text="Próg/progi" GridPane.rowIndex="2"/>
+                                        <Label text="Wniosek" GridPane.rowIndex="3" />
+                                        <TextField fx:id="argumentInput" alignment="TOP_LEFT" promptText="Argument" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+                                        <TextField fx:id="operatorInput" promptText="Operator(y)" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                                        <TextField fx:id="valuesInput" promptText="Próg/Progi" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+                                        <TextField fx:id="resultInput" promptText="Wniosek" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+                                        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                            <children>
+                                                <Button fx:id="addEditModelButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#saveAction" text="Dodaj" />
+                                                <Button mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#cancelAction" text="Anuluj" />
+                                                <Button fx:id="removeModelButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#removeAction" text="Usuń" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="402.0" prefWidth="248.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" SplitPane.resizableWithParent="true">
+                            <children>
+                                <GridPane fx:id="constraintPane" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" 
+                                          GridPane.hgrow="ALWAYS" SplitPane.resizableWithParent="true" maxWidth="1000" >
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="25.0" />
+                                        <ColumnConstraints percentWidth="75.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Ograniczenia" />
+                                        <TextField fx:id="constraintsInput" alignment="TOP_LEFT" promptText="Ograniczenia" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+                                        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <children>
+                                                <Button fx:id="addEditConstraintButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#saveAction" text="Dodaj" />
+                                                <Button mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#cancelAction" text="Anuluj" />
+                                                <Button fx:id="removeConstraintButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#removeAction" text="Usuń" />
                                             </children>
                                         </HBox>
                                     </children>

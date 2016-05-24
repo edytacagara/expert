@@ -5,16 +5,18 @@
  */
 package pl.expert.core.database.knowledge;
 
+import com.google.common.base.Joiner;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import pl.expert.core.engine.expression.OperatorEnum;
 
 /**
  *
  * @author Mariusz Batyra
  */
-public class Model implements Serializable {
+public class Model implements Serializable, KnowledgeElement {
 
     private String argument;
     private List<String> operators;
@@ -73,5 +75,18 @@ public class Model implements Serializable {
     public void setResolved(Boolean resolved) {
         this.resolved = resolved;
     }
-
+    
+    @Override
+    public String toString() {
+        return argument + " " + getCondition() + " -> " + result;
+    }
+    
+    private String getCondition() {
+        String condition = "";
+        for (int i=0; i< operators.size(); i++) {
+            condition += OperatorEnum.createByName(operators.get(i)).getOperator()+ " " + values.get(i);
+        }
+//        return Joiner.on(" ").join(operators, values);
+        return condition;
+    }
 }

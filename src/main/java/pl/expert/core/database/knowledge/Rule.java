@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Mariusz Batyra
  */
-public class Rule implements Serializable {
+public class Rule implements Serializable, KnowledgeElement {
 
     private List<String> conditions;
     private String result;
