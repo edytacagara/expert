@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import pl.expert.core.engine.expression.OperatorEnum;
 
 /**
@@ -75,18 +76,28 @@ public class Model implements Serializable, KnowledgeElement {
     public void setResolved(Boolean resolved) {
         this.resolved = resolved;
     }
-    
+
     @Override
     public String toString() {
         return argument + " " + getCondition() + " -> " + result;
     }
-    
+
+    public String getOperatorsToInput() {
+        return Joiner.on(", ").join(operators.stream()
+            .map(operator -> OperatorEnum.createByName(operator).getOperator())
+            .collect(Collectors.toList()));
+    }
+
+    public String getValuesToInput() {
+        return Joiner.on(", ").join(values);
+    }
+
     private String getCondition() {
-        String condition = "";
-        for (int i=0; i< operators.size(); i++) {
-            condition += OperatorEnum.createByName(operators.get(i)).getOperator()+ " " + values.get(i);
+        if (operators.size() == 2 && values.size() == 2) {
+            return OperatorEnum.createByName(operators.get(0)).getOperator() + " " + values.get(0)
+                + " i " + OperatorEnum.createByName(operators.get(1)).getOperator() + " " + values.get(1);
+        } else {
+            return OperatorEnum.createByName(operators.get(0)).getOperator() + " " + values.get(0);
         }
-//        return Joiner.on(" ").join(operators, values);
-        return condition;
     }
 }

@@ -47,7 +47,7 @@
                                     <children>
                                         <Button fx:id="addEditRuleButton" mnemonicParsing="false" onMouseClicked="#saveAction" text="Dodaj" />
                                         <Button mnemonicParsing="false" onMouseClicked="#cancelAction" text="Anuluj" />
-                                        <Button fx:id="removeRuleButton" mnemonicParsing="false" onMouseClicked="#removeAction" text="Usuń" visible="false"  />
+                                        <Button fx:id="removeRuleButton" mnemonicParsing="false" onMouseClicked="#removeAction" text="Usuń" visible="false" />
                                     </children>
                                 </HBox>
                             </children>
@@ -66,18 +66,18 @@
                             </rowConstraints>
                             <children>
                                 <Label text="Argument" />
-                                <Label text="Operatory(y)" GridPane.rowIndex="1"/>
-                                <Label text="Próg/progi" GridPane.rowIndex="2"/>
+                                <Label text="Operatory" GridPane.rowIndex="1"/>
+                                <Label text="Wartości" GridPane.rowIndex="2"/>
                                 <Label text="Wniosek" GridPane.rowIndex="3" />
                                 <TextField fx:id="argumentInput" alignment="TOP_LEFT" promptText="Argument" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
-                                <TextField fx:id="operatorInput" promptText="Operator(y)" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                                <TextField fx:id="operatorsInput" promptText="Operator(y)" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
                                 <TextField fx:id="valuesInput" promptText="Próg/Progi" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
-                                <TextField fx:id="resultInput" promptText="Wniosek" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+                                <TextField fx:id="modelResultInput" promptText="Wniosek" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
                                 <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <children>
-                                        <Button fx:id="addEditModelButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#saveAction" text="Dodaj" />
-                                        <Button mnemonicParsing="false" onAction="#addButtonAction" onMouseClicked="#cancelAction" text="Anuluj" />
-                                        <Button fx:id="removeModelButton" mnemonicParsing="false" onAction="#removeAction" onMouseClicked="#removeAction" text="Usuń" />
+                                        <Button fx:id="addEditModelButton" mnemonicParsing="false" onMouseClicked="#saveAction" text="Dodaj" />
+                                        <Button mnemonicParsing="false" onMouseClicked="#cancelAction" text="Anuluj" />
+                                        <Button fx:id="removeModelButton" mnemonicParsing="false" onMouseClicked="#removeAction" text="Usuń" visible="false" />
                                     </children>
                                 </HBox>
                             </children>
@@ -101,7 +101,7 @@
                                     <children>
                                         <Button fx:id="addEditConstraintButton" mnemonicParsing="false" onMouseClicked="#saveAction" text="Dodaj" />
                                         <Button mnemonicParsing="false" onMouseClicked="#cancelAction" text="Anuluj" />
-                                        <Button fx:id="removeConstraintButton" mnemonicParsing="false" onMouseClicked="#removeAction" text="Usuń" />
+                                        <Button fx:id="removeConstraintButton" mnemonicParsing="false" onMouseClicked="#removeAction" text="Usuń" visible="false" />
                                     </children>
                                 </HBox>
                             </children>

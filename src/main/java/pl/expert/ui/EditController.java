@@ -26,11 +26,15 @@ import pl.expert.ui.dictionary.EditView;
 import pl.expert.utils.MessageDialogs;
 
 public class EditController implements Initializable {
+
     private static final String SAVE_BUTTON_LABEL = "Zapisz";
+    private static final String ADD_BUTTON_LABEL = "Dodaj";
 
     private Knowledge knowledge;
     private Rule selectedRule;
-    private int selectedRuleIndex;
+    private Model selectedModel;
+    private Constraint selectedConstraint;
+    private Integer selectedElementIndex;
 
     @FXML
     private Pane testPane;
@@ -49,6 +53,21 @@ public class EditController implements Initializable {
 
     @FXML
     private TextField ruleResultInput;
+
+    @FXML
+    private TextField argumentInput;
+
+    @FXML
+    private TextField operatorsInput;
+
+    @FXML
+    private TextField valuesInput;
+
+    @FXML
+    private TextField modelResultInput;
+
+    @FXML
+    private TextField constraintsInput;
 
     @FXML
     private Button addEditRuleButton;
@@ -71,9 +90,6 @@ public class EditController implements Initializable {
     @FXML
     private ListView<KnowledgeElement> listView;
     ObservableList<KnowledgeElement> items = FXCollections.observableArrayList();
-    ObservableList<Rule> ruleItems = FXCollections.observableArrayList();
-    ObservableList<Model> modelItems = FXCollections.observableArrayList();
-    ObservableList<Constraint> constraintItems = FXCollections.observableArrayList();
 
     private EditView editView;
 
@@ -102,6 +118,7 @@ public class EditController implements Initializable {
 
     @FXML
     public void saveAction(MouseEvent event) {
+        //TODO save
 
         if (!checkIfIsRuleValid()) {
             MessageDialogs.showSimpleErrorAlert("Zapisywana reguła jest niepoprawna");
@@ -113,13 +130,13 @@ public class EditController implements Initializable {
 
         if (selectedRule == null) {
             Rule newRule = new Rule(conditions, result);
-            ruleItems.add(newRule);
+//            ruleItems.add(newRule);
         } else {
             selectedRule.setConditions(conditions);
             selectedRule.setResult(result);
             ((Rule) listView.getSelectionModel().getSelectedItem()).updateRule(selectedRule);
-            ruleItems.remove(selectedRuleIndex);
-            ruleItems.add(selectedRuleIndex, selectedRule);
+//            ruleItems.remove(selectedElementIndex);
+//            ruleItems.add(selectedElementIndex, selectedRule);
             listView.getSelectionModel().clearSelection();
         }
         clearInputs();
@@ -131,24 +148,36 @@ public class EditController implements Initializable {
     public void cancelAction(MouseEvent event) {
         listView.getSelectionModel().clearSelection();
         selectedRule = null;
+        selectedModel = null;
+        selectedConstraint = null;
+        selectedElementIndex = null;
+
         clearInputs();
-        addEditRuleButton.setText("Dodaj");
+
+        addEditRuleButton.setText(ADD_BUTTON_LABEL);
         removeRuleButton.setVisible(false);
+        addEditModelButton.setText(ADD_BUTTON_LABEL);
+        removeModelButton.setVisible(false);
+        addEditConstraintButton.setText(ADD_BUTTON_LABEL);
+        removeConstraintButton.setVisible(false);
     }
 
     @FXML
     public void removeAction(MouseEvent event) {
-        ruleItems.remove(selectedRuleIndex);
-        listView.getSelectionModel().clearSelection();
-        selectedRule = null;
-        clearInputs();
-        addEditRuleButton.setText("Dodaj");
-        removeRuleButton.setVisible(false);
+        items.remove(selectedElementIndex.intValue());
+        cancelAction(event);
     }
 
     private void clearInputs() {
         conditionsInput.clear();
         ruleResultInput.clear();
+
+        argumentInput.clear();
+        operatorsInput.clear();
+        valuesInput.clear();
+        modelResultInput.clear();
+
+        constraintsInput.clear();
     }
 
     private boolean checkIfIsRuleValid() {
@@ -182,24 +211,13 @@ public class EditController implements Initializable {
                 break;
             default:
         }
-
     }
 
     private void reactOnListElementSelected(EditView editView) {
-        showNeededButtonsAndAdjustTheirLabels(editView);
-        
-        switch (editView) {
-            case RULE:
-                selectedRule = (Rule) listView.getSelectionModel().getSelectedItem();
-                selectedRuleIndex = ruleItems.indexOf(selectedRule);
-                conditionsInput.setText(selectedRule.getConditionsToInput());
-                ruleResultInput.setText(selectedRule.getResult());
-                break;
-            case MODEL:
-                break;
-            case CONSTRAINT:
-                break;
-            default:
+        findSelectedValue(editView);
+        if (selectedElementIndex.intValue() != -1) {
+            fillFormFieldsByValuesFromSelectedElement(editView);
+            showNeededButtonsAndAdjustTheirLabels(editView);
         }
     }
 
@@ -231,7 +249,7 @@ public class EditController implements Initializable {
         columnConstrains.get(1).setPercentWidth(75.0);
         conditionsInput.setPrefWidth(370);
     }
-    
+
     private void showNeededButtonsAndAdjustTheirLabels(EditView editView) {
         switch (editView) {
             case RULE:
@@ -245,6 +263,43 @@ public class EditController implements Initializable {
             case CONSTRAINT:
                 addEditConstraintButton.setText(SAVE_BUTTON_LABEL);
                 removeConstraintButton.setVisible(true);
+                break;
+            default:
+        }
+    }
+
+    private void findSelectedValue(EditView editView) {
+        switch (editView) {
+            case RULE:
+                selectedRule = (Rule) listView.getSelectionModel().getSelectedItem();
+                selectedElementIndex = items.indexOf(selectedRule);
+                break;
+            case MODEL:
+                selectedModel = (Model) listView.getSelectionModel().getSelectedItem();
+                selectedElementIndex = items.indexOf(selectedModel);
+                break;
+            case CONSTRAINT:
+                selectedConstraint = (Constraint) listView.getSelectionModel().getSelectedItem();
+                selectedElementIndex = items.indexOf(selectedConstraint);
+                break;
+            default:
+        }
+    }
+
+    private void fillFormFieldsByValuesFromSelectedElement(EditView editView) {
+        switch (editView) {
+            case RULE:
+                conditionsInput.setText(selectedRule.getConditionsToInput());
+                ruleResultInput.setText(selectedRule.getResult());
+                break;
+            case MODEL:
+                argumentInput.setText(selectedModel.getArgument());
+                operatorsInput.setText(selectedModel.getOperatorsToInput());
+                valuesInput.setText(selectedModel.getValuesToInput());
+                modelResultInput.setText(selectedModel.getResult());
+                break;
+            case CONSTRAINT:
+                constraintsInput.setText(selectedConstraint.toString());
                 break;
             default:
         }
