@@ -101,7 +101,7 @@ public class MenuController {
 
     private void editKnowledge(EditView editView) {
         //uncomment to autoload knowledge base
-//        loadFileForTestPurposes();
+        loadFileForTestPurposes();
 
         if (!checkIfKnowledgeBaseLoaded()) {
             return;

@@ -26,6 +26,7 @@ import pl.expert.ui.dictionary.EditView;
 import pl.expert.utils.MessageDialogs;
 
 public class EditController implements Initializable {
+    private static final String SAVE_BUTTON_LABEL = "Zapisz";
 
     private Knowledge knowledge;
     private Rule selectedRule;
@@ -50,10 +51,22 @@ public class EditController implements Initializable {
     private TextField ruleResultInput;
 
     @FXML
-    private Button addEditButton;
+    private Button addEditRuleButton;
 
     @FXML
-    private Button removeButton;
+    private Button removeRuleButton;
+
+    @FXML
+    private Button addEditModelButton;
+
+    @FXML
+    private Button removeModelButton;
+
+    @FXML
+    private Button addEditConstraintButton;
+
+    @FXML
+    private Button removeConstraintButton;
 
     @FXML
     private ListView<KnowledgeElement> listView;
@@ -84,15 +97,7 @@ public class EditController implements Initializable {
     }
 
     public void listElementSelected(MouseEvent event) {
-        //TODO ogarnąć ifa, dałem, żeby nie leciały wyjątki przy klikaniu na różne listy
-        if (editView.equals(EditView.RULE)) {
-            addEditButton.setText("Zapisz");
-            removeButton.setVisible(true);
-            selectedRule = (Rule) listView.getSelectionModel().getSelectedItem();
-            selectedRuleIndex = ruleItems.indexOf(selectedRule);
-            conditionsInput.setText(selectedRule.getConditionsToInput());
-            ruleResultInput.setText(selectedRule.getResult());
-        }
+        reactOnListElementSelected(editView);
     }
 
     @FXML
@@ -118,8 +123,8 @@ public class EditController implements Initializable {
             listView.getSelectionModel().clearSelection();
         }
         clearInputs();
-        addEditButton.setText("Dodaj");
-        removeButton.setVisible(false);
+        addEditRuleButton.setText("Dodaj");
+        removeRuleButton.setVisible(false);
     }
 
     @FXML
@@ -127,8 +132,8 @@ public class EditController implements Initializable {
         listView.getSelectionModel().clearSelection();
         selectedRule = null;
         clearInputs();
-        addEditButton.setText("Dodaj");
-        removeButton.setVisible(false);
+        addEditRuleButton.setText("Dodaj");
+        removeRuleButton.setVisible(false);
     }
 
     @FXML
@@ -137,8 +142,8 @@ public class EditController implements Initializable {
         listView.getSelectionModel().clearSelection();
         selectedRule = null;
         clearInputs();
-        addEditButton.setText("Dodaj");
-        removeButton.setVisible(false);
+        addEditRuleButton.setText("Dodaj");
+        removeRuleButton.setVisible(false);
     }
 
     private void clearInputs() {
@@ -180,6 +185,24 @@ public class EditController implements Initializable {
 
     }
 
+    private void reactOnListElementSelected(EditView editView) {
+        showNeededButtonsAndAdjustTheirLabels(editView);
+        
+        switch (editView) {
+            case RULE:
+                selectedRule = (Rule) listView.getSelectionModel().getSelectedItem();
+                selectedRuleIndex = ruleItems.indexOf(selectedRule);
+                conditionsInput.setText(selectedRule.getConditionsToInput());
+                ruleResultInput.setText(selectedRule.getResult());
+                break;
+            case MODEL:
+                break;
+            case CONSTRAINT:
+                break;
+            default:
+        }
+    }
+
     private void initializeList(EditView editView) {
         testPane.setVisible(false);
         knowledge = Context.getInstance().getKnowledge();
@@ -202,10 +225,28 @@ public class EditController implements Initializable {
                 break;
             default:
         }
-        
+
         ObservableList<ColumnConstraints> columnConstrains = rulePane.getColumnConstraints();
         columnConstrains.get(0).setPercentWidth(25.0);
         columnConstrains.get(1).setPercentWidth(75.0);
         conditionsInput.setPrefWidth(370);
+    }
+    
+    private void showNeededButtonsAndAdjustTheirLabels(EditView editView) {
+        switch (editView) {
+            case RULE:
+                addEditRuleButton.setText(SAVE_BUTTON_LABEL);
+                removeRuleButton.setVisible(true);
+                break;
+            case MODEL:
+                addEditModelButton.setText(SAVE_BUTTON_LABEL);
+                removeModelButton.setVisible(true);
+                break;
+            case CONSTRAINT:
+                addEditConstraintButton.setText(SAVE_BUTTON_LABEL);
+                removeConstraintButton.setVisible(true);
+                break;
+            default:
+        }
     }
 }
