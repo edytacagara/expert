@@ -2,6 +2,7 @@ package pl.expert.ui;
 
 import com.google.common.base.Strings;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -166,6 +167,28 @@ public class EditController implements Initializable {
     public void removeAction(MouseEvent event) {
         items.remove(selectedElementIndex.intValue());
         cancelAction(event);
+        
+        List<Rule> newRulesList = new ArrayList<Rule>();
+        List<Model> newModelElementsList = new ArrayList<Model>();
+        List<Constraint> newConstraintsList = new ArrayList<Constraint>();
+        switch (editView) {
+            case RULE:
+                items.forEach(rule -> newRulesList.add((Rule) rule));
+                Context.getInstance().getKnowledge().setRules(newRulesList);
+                knowledge = Context.getInstance().getKnowledge();
+                break;
+            case MODEL:
+                items.forEach(model -> newModelElementsList.add((Model) model));
+                Context.getInstance().getKnowledge().setModels(newModelElementsList);
+                knowledge = Context.getInstance().getKnowledge();
+                break;
+            case CONSTRAINT:
+                items.forEach(constraint -> newConstraintsList.add((Constraint) constraint));
+                Context.getInstance().getKnowledge().setConstraints(newConstraintsList);
+                knowledge = Context.getInstance().getKnowledge();
+                break;
+            default:
+        }
     }
 
     private void clearInputs() {
