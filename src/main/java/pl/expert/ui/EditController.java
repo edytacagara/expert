@@ -1,6 +1,7 @@
 package pl.expert.ui;
 
 import com.google.common.base.Strings;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,7 @@ import pl.expert.core.database.knowledge.Knowledge;
 import pl.expert.core.database.knowledge.KnowledgeElement;
 import pl.expert.core.database.knowledge.Model;
 import pl.expert.core.database.knowledge.Rule;
+import pl.expert.core.engine.expression.OperatorEnum;
 import pl.expert.ui.dictionary.EditView;
 import pl.expert.utils.MessageDialogs;
 
@@ -152,28 +154,7 @@ public class EditController implements Initializable {
     public void removeAction(MouseEvent event) {
         items.remove(selectedElementIndex.intValue());
         cancelAction(event);
-
-        switch (editView) {
-            case RULE:
-                List<Rule> newRulesList = new ArrayList<Rule>();
-                items.forEach(rule -> newRulesList.add((Rule) rule));
-                Context.getInstance().getKnowledge().setRules(newRulesList);
-                knowledge = Context.getInstance().getKnowledge();
-                break;
-            case MODEL:
-                List<Model> newModelElementsList = new ArrayList<Model>();
-                items.forEach(model -> newModelElementsList.add((Model) model));
-                Context.getInstance().getKnowledge().setModels(newModelElementsList);
-                knowledge = Context.getInstance().getKnowledge();
-                break;
-            case CONSTRAINT:
-                List<Constraint> newConstraintsList = new ArrayList<Constraint>();
-                items.forEach(constraint -> newConstraintsList.add((Constraint) constraint));
-                Context.getInstance().getKnowledge().setConstraints(newConstraintsList);
-                knowledge = Context.getInstance().getKnowledge();
-                break;
-            default:
-        }
+        updateKnowledgeBase(editView);
     }
 
     private void clearInputs() {
@@ -349,14 +330,14 @@ public class EditController implements Initializable {
                     condition = condition.trim();
                 }
 
-                String result = ruleResultInput.getText();
+                String ruleResult = ruleResultInput.getText();
 
                 if (selectedRule == null) {
-                    Rule newRule = new Rule(conditions, result);
+                    Rule newRule = new Rule(conditions, ruleResult);
                     items.add(newRule);
                 } else {
                     selectedRule.setConditions(conditions);
-                    selectedRule.setResult(result);
+                    selectedRule.setResult(ruleResult);
                     ((Rule) listView.getSelectionModel().getSelectedItem()).updateRule(selectedRule);
                     items.remove(selectedElementIndex.intValue());
                     items.add(selectedElementIndex, selectedRule);
@@ -364,6 +345,37 @@ public class EditController implements Initializable {
                 }
                 break;
             case MODEL:
+                String argument = argumentInput.getText();
+
+                List<String> operatorsPlain = Arrays.asList(operatorsInput.getText().split(","));
+                List<String> operators = new ArrayList<>();
+                for (String operator : operatorsPlain) {
+                    operator = OperatorEnum.createByOperator(operator.trim()).getName();
+                    operators.add(operator);
+                }
+
+                List<String> valuesString = Arrays.asList(valuesInput.getText().split(","));
+                List<BigDecimal> values = new ArrayList<>();
+                for (String value : valuesString) {
+                    value = value.trim();
+                    values.add(new BigDecimal(value.trim()));
+                }
+
+                String modelResult = modelResultInput.getText();
+
+                if (selectedModel == null) {
+                    Model newModel = new Model(argument, operators, values, modelResult);
+                    items.add(newModel);
+                } else {
+                    selectedModel.setArgument(argument);
+                    selectedModel.setOperators(operators);
+                    selectedModel.setValues(values);
+                    selectedModel.setResult(modelResult);
+                    ((Model) listView.getSelectionModel().getSelectedItem()).updateModel(selectedModel);
+                    items.remove(selectedElementIndex.intValue());
+                    items.add(selectedElementIndex, selectedModel);
+                    listView.getSelectionModel().clearSelection();
+                }
                 break;
             case CONSTRAINT:
                 List<String> constraints = Arrays.asList(constraintsInput.getText().split(","));
@@ -381,6 +393,31 @@ public class EditController implements Initializable {
                     items.add(selectedElementIndex, selectedConstraint);
                     listView.getSelectionModel().clearSelection();
                 }
+                break;
+            default:
+        }
+        updateKnowledgeBase(editView);
+    }
+
+    private void updateKnowledgeBase(EditView editView) {
+        switch (editView) {
+            case RULE:
+                List<Rule> newRulesList = new ArrayList<Rule>();
+                items.forEach(rule -> newRulesList.add((Rule) rule));
+                Context.getInstance().getKnowledge().setRules(newRulesList);
+                knowledge = Context.getInstance().getKnowledge();
+                break;
+            case MODEL:
+                List<Model> newModelElementsList = new ArrayList<Model>();
+                items.forEach(model -> newModelElementsList.add((Model) model));
+                Context.getInstance().getKnowledge().setModels(newModelElementsList);
+                knowledge = Context.getInstance().getKnowledge();
+                break;
+            case CONSTRAINT:
+                List<Constraint> newConstraintsList = new ArrayList<Constraint>();
+                items.forEach(constraint -> newConstraintsList.add((Constraint) constraint));
+                Context.getInstance().getKnowledge().setConstraints(newConstraintsList);
+                knowledge = Context.getInstance().getKnowledge();
                 break;
             default:
         }

@@ -11,21 +11,27 @@ package pl.expert.core.engine.expression;
  */
 public enum OperatorEnum {
 
-    EQ("=="),
-    NE("!="),
-    LT("<"),
-    LE("<="),
-    GE(">="),
-    GT(">");
+    EQ("==", "eq"),
+    NE("!=", "ne"),
+    LT("<", "lt"),
+    LE("<=", "le"),
+    GE(">=", "ge"),
+    GT(">", "gt");
 
     private final String operator;
+    private final String name;
 
-    private OperatorEnum(final String operator) {
+    private OperatorEnum(final String operator, final String name) {
         this.operator = operator;
+        this.name = name;
     }
 
     public String getOperator() {
         return operator;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public static OperatorEnum createByName(final String name) {
@@ -37,4 +43,12 @@ public enum OperatorEnum {
         return null;
     }
 
+    public static OperatorEnum createByOperator(final String operator) {
+        for (OperatorEnum i : OperatorEnum.values()) {
+            if (i.getOperator().equalsIgnoreCase(operator)) {
+                return i;
+            }
+        }
+        return null;
+    }
 }

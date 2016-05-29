@@ -92,6 +92,13 @@ public class Model implements Serializable, KnowledgeElement {
         return Joiner.on(", ").join(values);
     }
 
+    public void updateModel(Model newModel) {
+        this.argument = newModel.getArgument();
+        this.operators = newModel.getOperators();
+        this.values = newModel.getValues();
+        this.result = newModel.getResult();
+    }
+
     private String getCondition() {
         if (operators.size() == 2 && values.size() == 2) {
             return OperatorEnum.createByName(operators.get(0)).getOperator() + " " + values.get(0)
