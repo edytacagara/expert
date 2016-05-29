@@ -1,8 +1,3 @@
-/*
- * The GNU GPL License 
- * Copyright (c) 2015-2016 IT Students of 5th year 
- * at the University of Maria Curie-Sklodowska in Lublin 
- */
 package pl.expert.ui;
 
 import com.google.common.base.Strings;
@@ -187,7 +182,7 @@ public class EditController implements Initializable {
 
     private void initializeList(EditView editView) {
         testPane.setVisible(false);
-        knowledge = MainFrame.getKnowledge();
+        knowledge = Context.getInstance().getKnowledge();
 
         switch (editView) {
             case RULE:

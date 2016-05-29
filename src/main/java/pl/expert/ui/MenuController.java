@@ -1,8 +1,3 @@
-/*
- * The GNU GPL License 
- * Copyright (c) 2015-2016 IT Students of 5th year 
- * at the University of Maria Curie-Sklodowska in Lublin 
- */
 package pl.expert.ui;
 
 import java.io.File;
@@ -76,7 +71,7 @@ public class MenuController {
     private void loadFile(File file) {
         try {
             Knowledge knowledge = new KnowledgeReader().loadKnowledge(file);
-            MainFrame.setKnowledge(knowledge);
+            Context.getInstance().setKnowledge(knowledge);
             LOGGER.log(Level.INFO, "wczytano {0}", file.getName());
             MessageDialogs.showSuccessAlert("Baza wiedzy została poprawnie wczytana");
         } catch (KnowledgeReaderException exception) {
@@ -91,7 +86,7 @@ public class MenuController {
     }
 
     private boolean checkIfKnowledgeBaseLoaded() {
-        if (MainFrame.getKnowledge() == null) {
+        if (Context.getInstance().getKnowledge() == null) {
             MessageDialogs.showSimpleErrorAlert("Nie wczytano jeszcze bazy wiedzy");
             return false;
         }

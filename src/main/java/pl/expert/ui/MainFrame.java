@@ -14,14 +14,12 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import pl.expert.core.database.knowledge.Knowledge;
 
 public class MainFrame extends Application {
 
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 800;
     private static Stage primaryStage;
-    private static Knowledge knowledge;
 
     // Creating a static root to pass to the controller
     private static BorderPane root = new BorderPane();
@@ -52,13 +50,5 @@ public class MainFrame extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    public static Knowledge getKnowledge() {
-        return knowledge;
-    }
-
-    public static void setKnowledge(Knowledge knowledge) {
-        MainFrame.knowledge = knowledge;
     }
 }

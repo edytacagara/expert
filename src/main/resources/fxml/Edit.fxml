@@ -41,7 +41,7 @@
                                         <RowConstraints />
                                     </rowConstraints>
                                     <children>
-                                        <Label text="Warunki" />
+                                        <Label text="Warunki" GridPane.rowIndex="0"/>
                                         <Label text="Wniosek" GridPane.rowIndex="1" />
                                         <TextField fx:id="conditionsInput" alignment="TOP_LEFT" promptText="Warunki" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
                                         <TextField fx:id="ruleResultInput" promptText="Wniosek" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
