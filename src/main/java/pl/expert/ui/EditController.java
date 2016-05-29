@@ -119,30 +119,15 @@ public class EditController implements Initializable {
 
     @FXML
     public void saveAction(MouseEvent event) {
-        //TODO save
+        //TODO save and edit
 
         if (!checkIfIsRuleValid()) {
             MessageDialogs.showSimpleErrorAlert("Zapisywana reguła jest niepoprawna");
             return;
         }
 
-        List<String> conditions = Arrays.asList(conditionsInput.getText().replace(" ", "").split(","));
-        String result = ruleResultInput.getText();
-
-        if (selectedRule == null) {
-            Rule newRule = new Rule(conditions, result);
-//            ruleItems.add(newRule);
-        } else {
-            selectedRule.setConditions(conditions);
-            selectedRule.setResult(result);
-            ((Rule) listView.getSelectionModel().getSelectedItem()).updateRule(selectedRule);
-//            ruleItems.remove(selectedElementIndex);
-//            ruleItems.add(selectedElementIndex, selectedRule);
-            listView.getSelectionModel().clearSelection();
-        }
-        clearInputs();
-        addEditRuleButton.setText("Dodaj");
-        removeRuleButton.setVisible(false);
+        save(editView);
+        cancelAction(event);
     }
 
     @FXML
@@ -167,22 +152,22 @@ public class EditController implements Initializable {
     public void removeAction(MouseEvent event) {
         items.remove(selectedElementIndex.intValue());
         cancelAction(event);
-        
-        List<Rule> newRulesList = new ArrayList<Rule>();
-        List<Model> newModelElementsList = new ArrayList<Model>();
-        List<Constraint> newConstraintsList = new ArrayList<Constraint>();
+
         switch (editView) {
             case RULE:
+                List<Rule> newRulesList = new ArrayList<Rule>();
                 items.forEach(rule -> newRulesList.add((Rule) rule));
                 Context.getInstance().getKnowledge().setRules(newRulesList);
                 knowledge = Context.getInstance().getKnowledge();
                 break;
             case MODEL:
+                List<Model> newModelElementsList = new ArrayList<Model>();
                 items.forEach(model -> newModelElementsList.add((Model) model));
                 Context.getInstance().getKnowledge().setModels(newModelElementsList);
                 knowledge = Context.getInstance().getKnowledge();
                 break;
             case CONSTRAINT:
+                List<Constraint> newConstraintsList = new ArrayList<Constraint>();
                 items.forEach(constraint -> newConstraintsList.add((Constraint) constraint));
                 Context.getInstance().getKnowledge().setConstraints(newConstraintsList);
                 knowledge = Context.getInstance().getKnowledge();
@@ -204,14 +189,42 @@ public class EditController implements Initializable {
     }
 
     private boolean checkIfIsRuleValid() {
-        if (Strings.isNullOrEmpty(conditionsInput.getText())) {
-            return false;
-        }
 
-        if (Strings.isNullOrEmpty(ruleResultInput.getText())) {
-            return false;
-        }
+        switch (editView) {
+            case RULE:
+                if (Strings.isNullOrEmpty(conditionsInput.getText())) {
+                    return false;
+                }
 
+                if (Strings.isNullOrEmpty(ruleResultInput.getText())) {
+                    return false;
+                }
+                break;
+            case MODEL:
+                if (Strings.isNullOrEmpty(argumentInput.getText())) {
+                    return false;
+                }
+
+                if (Strings.isNullOrEmpty(operatorsInput.getText())) {
+                    return false;
+                }
+
+                if (Strings.isNullOrEmpty(valuesInput.getText())) {
+                    return false;
+                }
+
+                if (Strings.isNullOrEmpty(modelResultInput.getText())) {
+                    return false;
+                }
+                break;
+            case CONSTRAINT:
+                if (Strings.isNullOrEmpty(constraintsInput.getText())) {
+                    return false;
+                }
+                break;
+            default:
+                return true;
+        }
         return true;
     }
 
@@ -323,6 +336,51 @@ public class EditController implements Initializable {
                 break;
             case CONSTRAINT:
                 constraintsInput.setText(selectedConstraint.toString());
+                break;
+            default:
+        }
+    }
+
+    private void save(EditView editView) {
+        switch (editView) {
+            case RULE:
+                List<String> conditions = Arrays.asList(conditionsInput.getText().split(","));
+                for (String condition : conditions) {
+                    condition = condition.trim();
+                }
+
+                String result = ruleResultInput.getText();
+
+                if (selectedRule == null) {
+                    Rule newRule = new Rule(conditions, result);
+                    items.add(newRule);
+                } else {
+                    selectedRule.setConditions(conditions);
+                    selectedRule.setResult(result);
+                    ((Rule) listView.getSelectionModel().getSelectedItem()).updateRule(selectedRule);
+                    items.remove(selectedElementIndex.intValue());
+                    items.add(selectedElementIndex, selectedRule);
+                    listView.getSelectionModel().clearSelection();
+                }
+                break;
+            case MODEL:
+                break;
+            case CONSTRAINT:
+                List<String> constraints = Arrays.asList(constraintsInput.getText().split(","));
+                for (String constraint : constraints) {
+                    constraint = constraint.trim();
+                }
+
+                if (selectedConstraint == null) {
+                    Constraint newConstraint = new Constraint(constraints);
+                    items.add(newConstraint);
+                } else {
+                    selectedConstraint.setConstraint(constraints);
+                    ((Constraint) listView.getSelectionModel().getSelectedItem()).updateConstraint(selectedConstraint);
+                    items.remove(selectedElementIndex.intValue());
+                    items.add(selectedElementIndex, selectedConstraint);
+                    listView.getSelectionModel().clearSelection();
+                }
                 break;
             default:
         }

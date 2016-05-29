@@ -37,4 +37,8 @@ public class Constraint implements KnowledgeElement {
     public String toString() {
         return Joiner.on(", ").join(constraint);
     }
+
+    public void updateConstraint(Constraint newConstraint) {
+        this.constraint = newConstraint.getConstraint();
+    }
 }
