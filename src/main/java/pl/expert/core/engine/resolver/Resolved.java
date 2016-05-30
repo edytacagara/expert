@@ -25,8 +25,11 @@ public class Resolved {
     }
 
     public static void put(final String condition, final boolean value) {
+        Boolean oldValue = resolve.get(condition);
+        if(oldValue == null || oldValue != value) {
+            changed = true;
+        }
         resolve.put(condition, value);
-        changed = true;
     }
 
     public static boolean wasChanged() {
@@ -49,8 +52,10 @@ public class Resolved {
         } else if (!listBooleanResults.isEmpty()) {
             listBooleanResults.add(value);
             resolveDuplicates.put(condition, listBooleanResults);
+            changed = true;
         } else {
             putNonDuplicates(condition, value);
+            changed = true;
         }
     }
 
