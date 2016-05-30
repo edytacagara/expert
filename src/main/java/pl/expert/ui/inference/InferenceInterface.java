@@ -5,16 +5,23 @@
  */
 package pl.expert.ui.inference;
 
+import java.io.Serializable;
+import java.util.List;
+
+import pl.expert.core.database.knowledge.KnowledgeElement;
+import pl.expert.core.database.knowledge.Model;
+import pl.expert.core.database.knowledge.Rule;
+
 /**
  *
  * @author rafal16x
  */
 public interface InferenceInterface {
 
-    void onClose();
-    void onNextRule();
     void startAll();
-    void onStop();
-    void showSteps();
+    void onClose();
+    List<Rule> getRules();
+    List<Model> getModels();
+    
     
 }

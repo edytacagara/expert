@@ -19,14 +19,15 @@ public class Engine {
 
     private static final Logger LOG = Logger.getLogger(Engine.class.getName());
 
-    public void doMagic(final Knowledge knowledge) {
+    public Knowledge doMagic(final Knowledge knowledge) {
         LOG.log(Level.INFO, "Start algorithm");
         do {
             LOG.log(Level.INFO, "Next iteration");
             RuleResolver.resolve(knowledge);
         } while (Resolved.wasChanged());
         LOG.log(Level.INFO, "End algorithm");
-        printResult(knowledge);
+        return knowledge;
+        //printResult(knowledge);
     }
     
     private void printResult(final Knowledge knowledge) {

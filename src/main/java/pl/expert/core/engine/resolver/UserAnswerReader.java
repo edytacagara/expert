@@ -25,7 +25,7 @@ public class UserAnswerReader {
     public static final String BOOLEAN_QUESTION = "Zdecyduj prawda czy fałsz";
     private static final Logger LOG = Logger.getLogger(UserAnswerReader.class.getName());
 
-    public static BigDecimal readBigDecimal(String question) {
+/*    public static BigDecimal readBigDecimal(String question) {
         System.out.println("Question (numeric value): " + question);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         try {
@@ -35,9 +35,9 @@ public class UserAnswerReader {
             LOG.log(Level.SEVERE, "Error while input reading! {0}", e.getMessage());
             return null;
         }
-    }
+    }*/
 
-    public static boolean readBoolean(String question) {
+/*    public static boolean readBoolean(String question) {
         System.out.println("Question (logical value y/n): " + question + " ?");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         try {
@@ -47,7 +47,7 @@ public class UserAnswerReader {
             LOG.log(Level.SEVERE, "Error while input reading! {0}", e.getMessage());
             return false;
         }
-    }
+    }*/
 
     public static <T> T getAnswear(String question, String title, Class<?> type) {
         InputDialog<T> inputDialog = InputDialog.create(type);

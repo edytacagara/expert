@@ -107,4 +107,9 @@ public class Model implements Serializable, KnowledgeElement {
             return OperatorEnum.createByName(operators.get(0)).getOperator() + " " + values.get(0);
         }
     }
+
+	@Override
+	public boolean isResolved() {
+		return this.resolved != null;
+	}
 }

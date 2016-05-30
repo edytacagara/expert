@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.Object;
+
 /**
  *
  * @author Mariusz Batyra
@@ -66,4 +68,9 @@ public class Rule implements Serializable, KnowledgeElement {
         this.conditions = newRule.getConditions();
         this.result = newRule.getResult();
     }
+
+	@Override
+	public boolean isResolved() {
+		return this.resolved != null;
+	}
 }

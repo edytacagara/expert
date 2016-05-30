@@ -41,4 +41,9 @@ public class Constraint implements KnowledgeElement {
     public void updateConstraint(Constraint newConstraint) {
         this.constraint = newConstraint.getConstraint();
     }
+
+	@Override
+	public boolean isResolved() {
+		return false;
+	}
 }

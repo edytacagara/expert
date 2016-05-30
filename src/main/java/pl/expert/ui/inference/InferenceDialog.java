@@ -5,6 +5,8 @@
  */
 package pl.expert.ui.inference;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pl.expert.Context;
+import pl.expert.core.database.knowledge.Knowledge;
+import pl.expert.core.database.knowledge.KnowledgeElement;
+import pl.expert.core.database.knowledge.Model;
+import pl.expert.core.database.knowledge.Rule;
 import pl.expert.core.engine.Engine;
 import pl.expert.ui.exception.UIException;
 
@@ -21,15 +27,17 @@ import pl.expert.ui.exception.UIException;
  */
 public class InferenceDialog extends Stage implements InferenceInterface {
 
+	private Knowledge knowledge;
+	
     public InferenceDialog(Stage rootStage) throws UIException {
         super();
         this.initLayout();
-        this.setResizable(false);
+        this.knowledge = Context.getInstance().getKnowledge();
+        this.setResizable(true);
 
     }
 
     private void closeDialog() {
-        System.out.println("On close super");
         super.close();
 
     }
@@ -40,13 +48,7 @@ public class InferenceDialog extends Stage implements InferenceInterface {
 
     @Override
     public void onClose() {
-        System.out.println("On close ");
         this.closeDialog();
-    }
-
-    @Override
-    public void onNextRule() {
-        System.out.println("Next rule");
     }
 
     @Override
@@ -54,21 +56,13 @@ public class InferenceDialog extends Stage implements InferenceInterface {
         System.out.println("Start all");
 //        Thread thread = new Thread(() -> {
             Engine engine = new Engine();
-            engine.doMagic(Context.getInstance().getKnowledge());
+            engine.doMagic(this.knowledge);
 //        });
         System.out.println("Do magic starting");
 //        thread.start();
     }
-
-    @Override
-    public void onStop() {
-        System.out.println("on Stop");
-    }
-
-    @Override
-    public void showSteps() {
-        System.out.println("Show steps");
-    }
+    
+    
 
     private void initLayout() throws UIException {
         try {
@@ -82,4 +76,18 @@ public class InferenceDialog extends Stage implements InferenceInterface {
             throw new UIException("Blad qpodczas tworzenia layoutu", ex.getCause());
         }
     }
+
+	@Override
+	public List<Rule> getRules() {
+		return this.knowledge.getRules();
+	}
+
+	@Override
+	public List<Model> getModels() {
+		return this.knowledge.getModels();
+	}
+	
+	
+	
+	
 }
