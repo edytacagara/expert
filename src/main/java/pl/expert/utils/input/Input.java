@@ -17,4 +17,6 @@ public interface Input<T> {
      * @return
      */
     T getValue();
+    
+    boolean validate();
 }

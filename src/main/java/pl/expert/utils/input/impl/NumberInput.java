@@ -25,14 +25,14 @@ public class NumberInput extends TextField implements Input<BigDecimal>{
     private static final char DOT = '.';
 
     public NumberInput() {
-        this.addEventFilter(KeyEvent.KEY_TYPED, this.getKeyEvent());
+        //this.addEventFilter(KeyEvent.KEY_TYPED, this.getKeyEvent());
     }
 
     public void clean() {
         this.setText(EMPTY);
     }
 
-    private EventHandler<KeyEvent> getKeyEvent() {
+/*    private EventHandler<KeyEvent> getKeyEvent() {
         return (KeyEvent t) -> {
             char ar[] = t.getCharacter().toCharArray();
             char ch = ar[t.getCharacter().toCharArray().length - 1];
@@ -43,10 +43,30 @@ public class NumberInput extends TextField implements Input<BigDecimal>{
                 t.consume();
             }
         };
-    }
-
+    }*/
     @Override
     public BigDecimal getValue() {
         return  new BigDecimal(this.getText().replace(",", "."));
     }
+    
+    private boolean checkInput(){
+    	int dots = 0;
+    	int nonDigits = 0;
+    	String inputText = this.getText().replace(",", ".");
+    	char[] chars = inputText.toCharArray();
+    	for(char h : chars){
+    		if(h != '.' && !(h > '0' && h < '9') ){
+    			nonDigits++;
+    		}
+    		if(h == '.'){
+    			dots++;
+    		}
+    	}
+    	return dots < 2 && !(nonDigits > 0);
+    }
+
+	@Override
+	public boolean validate() {
+		return this.checkInput();
+	}
 }

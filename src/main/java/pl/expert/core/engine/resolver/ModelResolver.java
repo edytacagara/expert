@@ -28,7 +28,7 @@ public class ModelResolver {
         }
         for (Model model : models) {
             if (condition.equalsIgnoreCase(model.getResult())) {
-                BigDecimal userValue = UserAnswerReader.readBigDecimal(model.getArgument());
+                BigDecimal userValue =  UserAnswerReader.getAnswear(condition, UserAnswerReader.NUMBER_QUESTION, BigDecimal.class);
                 boolean resolve = resolveModel(userValue, model);
                 model.setResolved(resolve);
                 Resolved.put(condition, resolve);

@@ -40,4 +40,11 @@ public class BooleanInput extends HBox implements Input<Boolean> {
             rb.setToggleGroup(this.group);
         }
     }
+
+	@Override
+	public boolean validate() {
+		return true;
+	}
+    
+    
 }

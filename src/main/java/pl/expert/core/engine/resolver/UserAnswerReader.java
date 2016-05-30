@@ -49,11 +49,11 @@ public class UserAnswerReader {
         }
     }
 
-//    public static <T> T getAnswear(String question, String title, Class<?> type) {
-//        InputDialog<T> inputDialog = InputDialog.create(type);
-//        inputDialog.setTitle(title);
-//        inputDialog.setQuestion(question);
-//        Optional<Input<T>> result = inputDialog.showAndWait();
-//        return result.get().getValue();
-//    }
+    public static <T> T getAnswear(String question, String title, Class<?> type) {
+        InputDialog<T> inputDialog = InputDialog.create(type);
+        inputDialog.setTitle(title);
+        inputDialog.setQuestion(question);
+        Optional<Input<T>> result = inputDialog.showAndWait();
+        return result.get().getValue();
+    }
 }

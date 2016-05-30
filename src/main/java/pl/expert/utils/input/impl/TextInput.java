@@ -21,4 +21,9 @@ public class TextInput extends TextField implements Input<String> {
         return this.getText();
     }
 
+	@Override
+	public boolean validate() {
+		return (!this.getText().contains(""));
+	}
+
 }

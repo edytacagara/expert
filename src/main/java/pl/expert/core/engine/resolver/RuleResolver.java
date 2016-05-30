@@ -29,7 +29,7 @@ public class RuleResolver {
                     ModelResolver.resolve(knowledge.getModels(), condition);
                     conditionResolved = Resolved.get(condition);
                     if (conditionResolved == null) {
-                        conditionResolved = UserAnswerReader.readBoolean(condition);
+                        conditionResolved = UserAnswerReader.getAnswear(condition, UserAnswerReader.BOOLEAN_QUESTION, Boolean.class);
                         Resolved.put(condition, conditionResolved);
                     }
                     ConstraintResolver.resolveConstraint(knowledge.getConstraints(), condition);
