@@ -168,7 +168,7 @@
 			<result>udar</result>
 		</rule>
 		<rule>
-			<conditions>badania pomocnicze(TK,MR,USG) wskazujace udar</conditions>
+			<conditions>badania pomocnicze(TK;MR;USG) wskazujace udar</conditions>
 			<result>objawy neurologiczne</result>
 		</rule>
 		<rule>
@@ -176,19 +176,19 @@
 			<result>padaczka</result>
 		</rule>
 		<rule>
-			<conditions>badania pomocnicze(TK,MR,USG),zatarcie granicy miedzy istota szara i biala</conditions>
-			<result>badania pomocnicze(TK,MR,USG) wskazujace udar</result>
+			<conditions>badania pomocnicze(TK;MR;USG),zatarcie granicy miedzy istota szara i biala</conditions>
+			<result>badania pomocnicze(TK;MR;USG) wskazujace udar</result>
 		</rule>
 		<rule>
-			<conditions>badania pomocnicze(TK,MR,USG),krwawienie wewnatrzczaskowe</conditions>
-			<result>badania pomocnicze(TK,MR,USG) wskazujace udar</result>
+			<conditions>badania pomocnicze(TK;MR;USG),krwawienie wewnatrzczaskowe</conditions>
+			<result>badania pomocnicze(TK;MR;USG) wskazujace udar</result>
 		</rule>
 		<rule>
 			<conditions>nadcisnienie tetnicze,uzywki</conditions>
 			<result>udar</result>
 		</rule>
 		<rule>
-			<conditions>uraz mozgu(stlucznie,wstrzasniecie)</conditions>
+			<conditions>uraz mozgu(stlucznie;wstrzasniecie)</conditions>
 			<result>padaczka</result>
 		</rule>
 		<rule>
@@ -196,7 +196,7 @@
 			<result>padaczka</result>
 		</rule>
 		<rule>
-			<conditions>leki(antybiotyki,przeciwarytmiczne,chemioterapeutyki,rozluzniajace miesnie)</conditions>
+			<conditions>leki(antybiotyki;przeciwarytmiczne;chemioterapeutyki;rozluzniajace miesnie)</conditions>
 			<result>padaczka</result>
 		</rule>
 		<rule>
@@ -264,7 +264,7 @@
 			<result>postepujace porazenie nadjadrowe</result>
 		</rule>
 		<rule>
-			<conditions>choroba Parkinsona,postepujacy przebieg</conditions>
+			<conditions>postepujacy przebieg choroby Parkinsona</conditions>
 			<result>szybkie postepowanie zespolu parkinsona</result>
 		</rule>
 		<rule>
