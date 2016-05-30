@@ -26,6 +26,14 @@ public class Engine {
             RuleResolver.resolve(knowledge);
         } while (Resolved.wasChanged());
         LOG.log(Level.INFO, "End algorithm");
+        printResult(knowledge);
+    }
+    
+    private void printResult(final Knowledge knowledge) {
+        System.out.println("-------------- result ----------");
+        knowledge.getRules().stream().filter((rule) -> (rule.getResolved() != null)).forEach((rule) -> {
+            System.out.println("Rule: " + rule.getResult() + " -> " + rule.getResolved());
+        });
     }
 
 }
