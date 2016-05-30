@@ -40,8 +40,8 @@ public class RuleResolver {
                 }
             }
             rule.setResolved(ruleResult);
-            Resolved.put(rule.getResult(), ruleResult);
-            //Resolved.putWithDuplicates(rule.getResult(), ruleResult);
+//            Resolved.put(rule.getResult(), ruleResult);
+//            Resolved.putWithDuplicates(rule.getResult(), ruleResult);
             
         }
     }
