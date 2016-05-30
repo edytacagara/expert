@@ -29,6 +29,7 @@ import pl.expert.core.database.knowledge.Rule;
 import pl.expert.core.engine.expression.OperatorEnum;
 import pl.expert.ui.dictionary.AddEditErrorCode;
 import pl.expert.ui.dictionary.EditView;
+import pl.expert.ui.exception.ValidationException;
 import pl.expert.utils.MessageDialogs;
 
 public class EditController implements Initializable {
@@ -130,8 +131,15 @@ public class EditController implements Initializable {
             return;
         }
 
-        save(editView);
-        cancelAction(event);
+        try {
+            save(editView);
+            cancelAction(event);
+        } catch (ValidationException validationException) {
+            MessageDialogs.showSimpleErrorAlert("Błąd walidacji", validationException.getErrorCode()
+                .getValidationErrorCode());
+            return;
+        }
+
     }
 
     @FXML
@@ -329,12 +337,13 @@ public class EditController implements Initializable {
         }
     }
 
-    private void save(EditView editView) {
+    private void save(EditView editView) throws ValidationException {
         switch (editView) {
             case RULE:
-                List<String> conditions = Arrays.asList(conditionsInput.getText().split(","));
-                for (String condition : conditions) {
-                    condition = condition.trim();
+                List<String> conditionsPlain = Arrays.asList(conditionsInput.getText().trim().split(","));
+                List<String> conditions = new ArrayList<>();
+                for (String condition : conditionsPlain) {
+                    conditions.add(condition.trim());
                 }
 
                 String ruleResult = ruleResultInput.getText();
@@ -354,18 +363,54 @@ public class EditController implements Initializable {
             case MODEL:
                 String argument = argumentInput.getText();
 
-                List<String> operatorsPlain = Arrays.asList(operatorsInput.getText().split(","));
+                List<String> operatorsPlain = Arrays.asList(operatorsInput.getText().trim().split(","));
                 List<String> operators = new ArrayList<>();
                 for (String operator : operatorsPlain) {
-                    operator = OperatorEnum.createByOperator(operator.trim()).getName();
+                    try {
+                        operator = OperatorEnum.createByOperator(operator.trim()).getName();
+                    } catch (NullPointerException e) {
+                        throw new ValidationException(AddEditErrorCode.ZLE_OPERATORY_MODELU);
+                    }
                     operators.add(operator);
                 }
 
-                List<String> valuesString = Arrays.asList(valuesInput.getText().split(","));
+                if (operators.isEmpty()) {
+                    throw new ValidationException(AddEditErrorCode.BRAK_OPERATOROW_MODELU);
+                }
+
+                if (operators.size() == 2 && (operators.get(0).equals(operators.get(1)))) {
+                    throw new ValidationException(AddEditErrorCode.TAKIE_SAME_OPERATORY_MODELU);
+                }
+
+                if (operators.size() > 2) {
+                    throw new ValidationException(AddEditErrorCode.ZA_DUZO_OPERATOROW_MODELU);
+                }
+
+                List<String> valuesString = Arrays.asList(valuesInput.getText().trim().split(","));
                 List<BigDecimal> values = new ArrayList<>();
                 for (String value : valuesString) {
                     value = value.trim();
-                    values.add(new BigDecimal(value.trim()));
+                    try {
+                        values.add(new BigDecimal(value.trim()));
+                    } catch (NumberFormatException e) {
+                        throw new ValidationException(AddEditErrorCode.ZLE_WARTOSCI_MODELU);
+                    }
+                }
+
+                if (values.isEmpty()) {
+                    throw new ValidationException(AddEditErrorCode.BRAK_WARTOSCI_MODELU);
+                }
+
+                if (values.size() == 2 && (values.get(0).equals(values.get(1)))) {
+                    throw new ValidationException(AddEditErrorCode.TAKIE_SAME_WARTOSCI_MODELU);
+                }
+
+                if (values.size() > 2) {
+                    throw new ValidationException(AddEditErrorCode.ZA_DUZO_WARTOSCI_MODELU);
+                }
+
+                if (operators.size() != values.size()) {
+                    throw new ValidationException(AddEditErrorCode.NIEZGODNA_LICZBA_OPERATOROW_I_WARTOSCI);
                 }
 
                 String modelResult = modelResultInput.getText();
@@ -385,9 +430,18 @@ public class EditController implements Initializable {
                 }
                 break;
             case CONSTRAINT:
-                List<String> constraints = Arrays.asList(constraintsInput.getText().split(","));
-                for (String constraint : constraints) {
-                    constraint = constraint.trim();
+                List<String> constraintsPlain = Arrays.asList(constraintsInput.getText().trim().split(","));
+                List<String> constraints = new ArrayList<>();
+                for (String constraint : constraintsPlain) {
+                    constraints.add(constraint.trim());
+                }
+
+                if (constraints.isEmpty()) {
+                    throw new ValidationException(AddEditErrorCode.BRAK_OGRANICZEN);
+                }
+
+                if (constraints.size() == 1) {
+                    throw new ValidationException(AddEditErrorCode.ZA_MALO_OGRANICZEN);
                 }
 
                 if (selectedConstraint == null) {
