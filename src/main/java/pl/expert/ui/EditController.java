@@ -1,5 +1,6 @@
 package pl.expert.ui;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +27,7 @@ import pl.expert.core.database.knowledge.KnowledgeElement;
 import pl.expert.core.database.knowledge.Model;
 import pl.expert.core.database.knowledge.Rule;
 import pl.expert.core.engine.expression.OperatorEnum;
+import pl.expert.ui.dictionary.AddEditErrorCode;
 import pl.expert.ui.dictionary.EditView;
 import pl.expert.utils.MessageDialogs;
 
@@ -121,10 +124,9 @@ public class EditController implements Initializable {
 
     @FXML
     public void saveAction(MouseEvent event) {
-        //TODO save and edit
-
-        if (!checkIfIsRuleValid()) {
-            MessageDialogs.showSimpleErrorAlert("Zapisywana reguła jest niepoprawna");
+        List<AddEditErrorCode> errors = checkIfIsRuleValid();
+        if (errors.size() > 0) {
+            MessageDialogs.showSimpleErrorAlert("Błąd walidacji", Joiner.on("\n").join(getValidationErrorCodes(errors)));
             return;
         }
 
@@ -169,44 +171,49 @@ public class EditController implements Initializable {
         constraintsInput.clear();
     }
 
-    private boolean checkIfIsRuleValid() {
+    private List<String> getValidationErrorCodes(List<AddEditErrorCode> errors) {
+        return errors.stream()
+            .map(error -> error.getValidationErrorCode())
+            .collect(Collectors.toList());
+    }
+
+    private List<AddEditErrorCode> checkIfIsRuleValid() {
+        List<AddEditErrorCode> errors = new ArrayList<>();
 
         switch (editView) {
             case RULE:
                 if (Strings.isNullOrEmpty(conditionsInput.getText())) {
-                    return false;
+                    errors.add(AddEditErrorCode.BRAK_WARUNKOW_REGULY);
                 }
 
                 if (Strings.isNullOrEmpty(ruleResultInput.getText())) {
-                    return false;
+                    errors.add(AddEditErrorCode.BRAK_WNIOSKU_REGULY);
                 }
                 break;
             case MODEL:
                 if (Strings.isNullOrEmpty(argumentInput.getText())) {
-                    return false;
+                    errors.add(AddEditErrorCode.BRAK_ARGUMENTU_MODELU);
                 }
 
                 if (Strings.isNullOrEmpty(operatorsInput.getText())) {
-                    return false;
+                    errors.add(AddEditErrorCode.BRAK_OPERATOROW_MODELU);
                 }
 
                 if (Strings.isNullOrEmpty(valuesInput.getText())) {
-                    return false;
+                    errors.add(AddEditErrorCode.BRAK_WARTOSCI_MODELU);
                 }
 
                 if (Strings.isNullOrEmpty(modelResultInput.getText())) {
-                    return false;
+                    errors.add(AddEditErrorCode.BRAK_WNIOSKU_MODELU);
                 }
                 break;
             case CONSTRAINT:
                 if (Strings.isNullOrEmpty(constraintsInput.getText())) {
-                    return false;
+                    errors.add(AddEditErrorCode.BRAK_OGRANICZEN);
                 }
                 break;
-            default:
-                return true;
         }
-        return true;
+        return errors;
     }
 
     private void hideProperPane(EditView editView) {
