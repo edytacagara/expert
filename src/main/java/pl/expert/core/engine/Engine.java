@@ -5,6 +5,8 @@
  */
 package pl.expert.core.engine;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pl.expert.core.database.knowledge.Knowledge;
@@ -29,11 +31,22 @@ public class Engine {
         printResult(knowledge);
         return knowledge;
     }
-    
+
+    private Map<String, Boolean> packResolvedToMap(final Knowledge knowledge) {
+        Map<String, Boolean> result = new LinkedHashMap<>();
+        knowledge.getRules().stream().filter((rule) -> (rule.getResolved() != null)).forEach((rule) -> {
+            result.put(rule.getResult(), rule.getResolved());
+        });
+
+        return result;
+    }
+
     private void printResult(final Knowledge knowledge) {
         System.out.println("-------------- result ----------");
-        knowledge.getRules().stream().filter((rule) -> (rule.getResolved() != null)).forEach((rule) -> {
-            System.out.println("Rule: " + rule.getResult() + " -> " + rule.getResolved());
+
+        Map<String, Boolean> resolvedMap = packResolvedToMap(knowledge);
+        resolvedMap.keySet().stream().forEach((key) -> {
+            System.out.println("Rule: " + key + " -> " + resolvedMap.get(key));
         });
     }
 
