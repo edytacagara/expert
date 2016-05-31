@@ -271,6 +271,148 @@
 			<conditions>drzenie rak,drzenie glowy</conditions>
 			<result>drzenie samoistne</result>
 		</rule>
+                <!--bialaczka -->
+                <rule>
+                    <conditions>goraczka,oslabienie</conditions>
+                    <result>objawy ogolne</result>
+                </rule>
+                <rule>
+                    <conditions>bolesne afty</conditions>
+                    <result>zmiany w jamie ustnej</result>
+                </rule>
+                <rule>
+                    <conditions>bolesne owrzodzenia w jamie ustnej</conditions>
+                    <result>zmiany w jamie ustnej</result>
+                </rule>
+                <rule>
+                    <conditions>ciezka i nawracajace anginy,zmiany w jamie ustnej</conditions>
+                    <result>uposledzenie odpornosci</result>
+                </rule>
+                <rule>
+                    <conditions>zaburzenia swiadomosci,leukocytoza</conditions>
+                    <result>leukostaza</result>
+                </rule>
+                <rule>
+                    <conditions>plaskie wykwity w skorze</conditions>
+                    <result>zmiany skorne</result>
+                </rule>
+                <rule>
+                    <conditions>guzki w skorze</conditions>
+                    <result>zmiany skorne</result>
+                </rule>
+                <rule>
+                    <conditions>zmiany skorne,nacieki przypominajace przerost dziasel</conditions>
+                    <result>naciekanie narzadow</result>
+                </rule>
+                <rule>
+                    <conditions>objawy oglne,naciekanie narzadow </conditions>
+                    <result>podejrzenie ostra bialaczka szpikowa</result>
+                </rule>
+                <rule>
+                    <conditions>uposledzenie odpornosci,naciekanie narzadow </conditions>
+                    <result>podejrzenie ostra bialaczka szpikowa</result>
+                </rule>
+                <rule>
+                    <conditions>uposzledzenie odpornosci,objawy ogolne </conditions>
+                    <result>podejrzenie ostra bialaczka szpikowa</result>
+                </rule>
+                <rule>
+                    <conditions>objawy oglne,uposledzenie odpornosci,naciekanie narzadow </conditions>
+                    <result>podejrzenie ostra bialaczka szpikowa</result>
+                </rule>
+                <rule>
+                    <conditions>podejrzenie ostra bialaczka szpikowa, leukostaza</conditions>
+                    <result>ostra bialaczka szpikowa</result>
+                </rule>
+                <rule>
+                    <conditions>podejrzenie ostra bialaczka szpikowa,brak leukocytozy</conditions>
+                    <result>mozliwy inny nowotwor</result>
+                </rule>
+                <rule>
+                    <conditions>powiekszone wezly chlone</conditions>
+                    <result>powiekszenie narzadow</result>
+                </rule>
+                <rule>
+                    <conditions>powiekszona sledziona</conditions>
+                    <result>powiekszenie narzadow</result>
+                </rule>
+                <rule>
+                    <conditions>podejrzenie ostra bialaczka szpikowa, powiekszenie narzadow</conditions>
+                    <result>podejrzenie ostrej bialaczki limfoblastycznej</result>
+                </rule>
+                <rule>
+                    <conditions>ostra bialaczka szpikowa,powiekszenie narzadow</conditions>
+                    <result>ostra bialaczka limfoblastyczna</result>
+                </rule>
+                <!-- cukrzyca-->
+                <rule>
+                    <conditions>duze pragnienie,czeste oddawanie moczu</conditions>
+                    <result>problemy wodne</result>
+                </rule>
+                <rule>
+                    <conditions>utrata wagi,duzy apetyt</conditions>
+                    <result>zaburzenia zywieniowe</result>
+                </rule>
+                <rule>
+                    <conditions>zamazane widzenie</conditions>
+                    <result>problemy ze zwrokiem</result>
+                </rule>
+                <rule>
+                    <conditions>podwojne widzenie</conditions>
+                    <result>porblemy ze zwrokiem</result>
+                </rule>
+                <rule>
+                    <conditions>problemy wodne,zaburzenia zywieniowe,problemy ze zwrokiem</conditions>
+                    <result>podejrzenie cukrzycy typu 1</result>
+                </rule>
+                <rule>
+                    <conditions>podejrzenie cukrzycy typu 1,za wysoki poziom cukru</conditions>
+                    <result>cukrzyca typu 1</result>
+                </rule>
+                <rule>
+                    <conditions>drazliwosc,apatia</conditions>
+                    <result>nerwowosc</result>
+                </rule>
+                <rule>
+                    <conditions>zmeczenie,sennosc</conditions>
+                    <result>brak checi do zycia</result>
+                </rule>
+                <rule>
+                    <conditions>latwe powstawanie siniakow,wolniejsze gojenie sie ran</conditions>
+                    <result>problemy krwionosne</result>
+                </rule>
+                <rule>
+                    <conditions>nawracajace zapalenia skory,swedzaca skora</conditions>
+                    <result>problemy skorne</result>
+                </rule>
+                <rule>
+                    <conditions>mrowienie stup</conditions>
+                    <result>problemy czuciowe</result>
+                </rule>
+                <rule>
+                    <conditions>utrata czucia w stopach</conditions>
+                    <result>problemy czuciowe</result>
+                </rule>
+                <rule>
+                    <conitions>za wysoki poziom cukru,problemy czuciowe,problemy krwionosne</conitions>
+                    <result>cukrzyca typu 2</result>
+                </rule>
+                <rule>
+                    <conitions>za wysoki poziom cukru,brak checi do zycia,problemy krwionosne</conitions>
+                    <result>cukrzyca typu 2</result>
+                </rule>
+                <rule>
+                    <conitions>za wysoki poziom cukru,nerwowosc,brak checi do zycia</conitions>
+                    <result>cukrzyca typu 2</result>
+                </rule>
+                <rule>
+                    <conitions>cukrzyca typu 1,nerwowosc,problemy czuciowe</conitions>
+                    <result>cukrzyca typu 2</result>
+                </rule>
+                <rule>
+                    <conitions>cukrzyca typu 1,nerwowosc,problemy krwionosne</conitions>
+                    <result>cukrzyca typu 2</result>
+                </rule>
 	</rules>
 
 	<models>
@@ -334,6 +476,24 @@
 			<value>21</value>
 			<result>czas trwania powyzej 21 dni</result>
 		</model>   
+                <model>
+                    <argument>Ilosc lekocytow zakres 5 , 15</argument>
+                    <operator>ge</operator>
+                    <value>10</value>
+                    <result>leukocytoza</result>
+                </model>
+                <model>
+                    <argument>Ilosc lekocytow zakres 5 , 15</argument>
+                    <operator>lt</operator>
+                    <value>10</value>
+                    <result>brak leukocytozy</result>
+                </model>
+                <model>
+                    <argument>Poziom cukru zakres 50 , 150</argument>
+                    <operator>ge</operator>
+                    <value>100</value>
+                    <result>za wysoki poziom cukru</result>
+                </model>
 	</models>
 	
 	<constraints>
@@ -341,6 +501,12 @@
 		<constraint>kobieta,mezczyzna</constraint>
 		<constraint>niedobor zelaza,spadek poziomu zelaza w czasie (jednak nadal w granicach normy)</constraint>
 		<constraint>niedobor ferrytyny,spadek poziomu ferrytyny w czasie (jednak nadal w granicach normy)</constraint>
+                <constraint>bolesne afty,bolesne owrzodzenia w jamie ustnej</constraint>
+                <constraint>leukocytoza,brak leukocytozy</constraint>
+                <constraint>plaskie wykwity w skorze,guzki w skorze</constraint>
+                <constraint>powiekszone wezly chlone,powiekszona sledziona</constraint>
+                <constraint>zamazane widzenie,podwojne widzenie</constraint>
+                <constraint>mrowienie stup,utrata czucia w stopach</constraint>
         </constraints>
 	
 </knowledge>
