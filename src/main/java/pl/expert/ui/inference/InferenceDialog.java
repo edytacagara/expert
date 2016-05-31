@@ -5,7 +5,6 @@
  */
 package pl.expert.ui.inference;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pl.expert.Context;
 import pl.expert.core.database.knowledge.Knowledge;
-import pl.expert.core.database.knowledge.KnowledgeElement;
 import pl.expert.core.database.knowledge.Model;
 import pl.expert.core.database.knowledge.Rule;
 import pl.expert.core.engine.Engine;
@@ -27,8 +25,8 @@ import pl.expert.ui.exception.UIException;
  */
 public class InferenceDialog extends Stage implements InferenceInterface {
 
-	private Knowledge knowledge;
-	
+    private Knowledge knowledge;
+
     public InferenceDialog(Stage rootStage) throws UIException {
         super();
         this.initLayout();
@@ -54,15 +52,9 @@ public class InferenceDialog extends Stage implements InferenceInterface {
     @Override
     public void startAll() {
         System.out.println("Start all");
-//        Thread thread = new Thread(() -> {
-            Engine engine = new Engine();
-            engine.doMagic(this.knowledge);
-//        });
-        System.out.println("Do magic starting");
-//        thread.start();
+        Engine engine = new Engine();
+        engine.doMagic(this.knowledge);
     }
-    
-    
 
     private void initLayout() throws UIException {
         try {
@@ -77,17 +69,14 @@ public class InferenceDialog extends Stage implements InferenceInterface {
         }
     }
 
-	@Override
-	public List<Rule> getRules() {
-		return this.knowledge.getRules();
-	}
+    @Override
+    public List<Rule> getRules() {
+        return this.knowledge.getRules();
+    }
 
-	@Override
-	public List<Model> getModels() {
-		return this.knowledge.getModels();
-	}
-	
-	
-	
-	
+    @Override
+    public List<Model> getModels() {
+        return this.knowledge.getModels();
+    }
+
 }
