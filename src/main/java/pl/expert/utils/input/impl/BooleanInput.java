@@ -23,9 +23,9 @@ public class BooleanInput extends HBox implements Input<Boolean> {
     public BooleanInput() {
         group = new ToggleGroup();
         this.yes = new RadioButton("Tak");
-        this.no = new RadioButton("No");
+        this.no = new RadioButton("Nie");
         this.yes.setSelected(true);
-        this.setGroup(yes,no);
+        this.setGroup(yes, no);
         this.getChildren().add(this.yes);
         this.getChildren().add(this.no);
     }
@@ -41,10 +41,9 @@ public class BooleanInput extends HBox implements Input<Boolean> {
         }
     }
 
-	@Override
-	public boolean validate() {
-		return true;
-	}
-    
-    
+    @Override
+    public boolean validate() {
+        return true;
+    }
+
 }
