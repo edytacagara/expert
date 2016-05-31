@@ -26,8 +26,8 @@ public class Engine {
             RuleResolver.resolve(knowledge);
         } while (Resolved.wasChanged());
         LOG.log(Level.INFO, "End algorithm");
+        printResult(knowledge);
         return knowledge;
-        //printResult(knowledge);
     }
     
     private void printResult(final Knowledge knowledge) {
